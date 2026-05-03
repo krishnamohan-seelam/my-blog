@@ -22,7 +22,7 @@ Vector search enables **semantic similarity** queries: instead of matching exact
 
 ## Prerequisites
 
-- A running **MongoDB Atlas** cluster (M10 or higher recommended for production)
+- A running **MongoDB Atlas** cluster (A MongoDB Atlas cluster M0 tier (free) should be sufficient)
 - A collection with documents that have an embedding field (e.g., `plot_embedding`)
 - A **Vector Search index** already created on the collection (see the [Index Setup section](#step-1-create-a-vector-search-index) below)
 - An API key for **Voyage AI** (or another embedding provider)
