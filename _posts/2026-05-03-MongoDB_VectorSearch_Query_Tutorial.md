@@ -10,7 +10,7 @@ image: assets/mongodb_vector_search.png
 
 # Introduction to  Vector Search Queries in MongoDB Atlas
 
-![mongodb_vector_search](../assets/mongodb_vector_search.png)
+![mongodb_vector_search](/assets/mongodb_vector_search.png)
 
 ## Overview
 
