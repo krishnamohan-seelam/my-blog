@@ -2,7 +2,7 @@
 title: "MongoDB Vector Search"
 description: "A comprehensive guide to MongoDB Vector Search"
 url: "https://krishnamohan-seelam.github.io"
-baseurl: ""
+baseurl: "/mongodb-vectorsearch"
 
 # Build settings
 markdown: kramdown
