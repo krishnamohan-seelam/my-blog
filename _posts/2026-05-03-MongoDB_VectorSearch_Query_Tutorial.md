@@ -10,6 +10,8 @@ image: assets/mongodb_vector_search.png
 
 # Introduction to  Vector Search Queries in MongoDB Atlas
 
+![mongodb_vector_search](../assets/mongodb_vector_search.png)
+
 ## Overview
 
 This tutorial walks you through the complete workflow of performing **vector search** in MongoDB Atlas — from generating text embeddings to constructing aggregation pipelines with and without pre-filters.
@@ -687,9 +689,7 @@ for doc in y:
 
 **KrishnaMohan Seelam** — Senior Engineer
 
-
 I write about developer tools, databases, and applied AI.
-
 
 If you found this useful, give it a 👏 and follow me for more!
 
