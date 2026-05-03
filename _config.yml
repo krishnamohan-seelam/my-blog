@@ -1,0 +1,25 @@
+# Site settings
+title: "MongoDB Vector Search"
+description: "A comprehensive guide to MongoDB Vector Search"
+url: "https://krishnamohan-seelam.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+
+# Include
+include:
+  - _pages
