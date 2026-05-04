@@ -1,4 +1,12 @@
-## Sparse & Dense Vectors in MongoDB Atlas
+---
+layout: post
+title: "Sparse and Dense Vectors in MongoDB Atlas"
+subtitle: "Understanding TF-IDF, sparse vectors, dense embeddings, cosine similarity, and hybrid vector search"
+date: 2026-04-29
+categories: [mongodb, vector-search, nlp]
+tags: [mongodb, vector-search, tf-idf, embeddings]
+---
+## Sparse and Dense Vectors in MongoDB Atlas
 
 A guide to TF-IDF, Sparse Vectors, Dense Vectors, and Atlas Vector Search  
 
@@ -9,7 +17,7 @@ MongoDB Atlas uses two fundamentally different vector types, each optimised for 
 • Sparse vectors — suited for text/lexical search, used in MongoDB Atlas Search.  
 • Dense vectors — suited for semantic search, used in MongoDB Atlas Vector Search.  
 
-![alt text](sparse_dense_vectors_image_1.png)
+![alt text](/assets/sparse_dense_vectors_image_1.png)
 
 > Figure 1 — Sparse vectors are high-dimensional but efficient (most values are zero). Dense vectors encode rich meaning across all dimensions, with very few zero values.
 
@@ -37,7 +45,7 @@ TF-IDF (Term Frequency–Inverse Document Frequency) combines two measures: how 
 
 ### 2.1 Formulas
 
-![alt text](sparse_dense_vectors_image_2.png)
+![alt text](/assets/sparse_dense_vectors_image_2.png)
 
 >Figure 2 — TF-IDF formula breakdown. Note: log base 10 is used in this tutorial. Implementations may use the natural log (ln) or log base 2 — always check the library or database documentation.
 
@@ -133,7 +141,7 @@ For illustration, assume an embedding model projects each sentence onto 6 semant
 
 Semantic search ranks documents by cosine similarity — the cosine of the angle between two vectors in the embedding space. A score of 1 means identical direction (same meaning); 0 means orthogonal (unrelated).  
 
-![alt text](sparse_dense_vectors_image_3.png)
+![alt text](/assets/sparse_dense_vectors_image_3.png)
 
 > Figure 3 — The two vectors point in very different directions, confirming a low cosine similarity (~0.225) despite both sentences containing "Atlas".
 
