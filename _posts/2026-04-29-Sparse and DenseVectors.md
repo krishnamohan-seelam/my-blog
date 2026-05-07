@@ -17,7 +17,7 @@ MongoDB Atlas uses two fundamentally different vector types, each optimised for 
 • Sparse vectors — suited for text/lexical search, used in MongoDB Atlas Search.  
 • Dense vectors — suited for semantic search, used in MongoDB Atlas Vector Search.  
 
-![alt text](/assets/sparse_dense_vectors_image_1.png)
+![alt text]({{ site.baseurl }}/assets/sparse_dense_vectors_image_1.png)
 
 > Figure 1 — Sparse vectors are high-dimensional but efficient (most values are zero). Dense vectors encode rich meaning across all dimensions, with very few zero values.
 
@@ -45,15 +45,15 @@ TF-IDF (Term Frequency–Inverse Document Frequency) combines two measures: how 
 
 ### 2.1 Formulas
 
-![alt text](/assets/sparse_dense_vectors_image_2.png)
+![alt text]({{ site.baseurl }}/assets/sparse_dense_vectors_image_2.png)
 
 >Figure 2 — TF-IDF formula breakdown. Note: log base 10 is used in this tutorial. Implementations may use the natural log (ln) or log base 2 — always check the library or database documentation.
 
-```
+```text
 TF  = (number of times "word" appears) / (total words in document)
 
 IDF = log10( Total documents in corpus / Documents containing "word" )
-      [Note: log base 10 used here; implementations may use ln or log2]
+  [Note: log base 10 used here; implementations may use ln or log2]
 
 TF-IDF = TF × IDF
 ```
@@ -66,7 +66,7 @@ Consider the following three-document corpus:
 - Doc 2 — Atlas the Titan
 - Doc 3 — Atlas the mountain
 
-**Step 1 — Term Frequency (TF)**  
+#### Step 1 — Term Frequency (TF)
 
 Each sentence has 3 words, so every word has TF = 1/3 ≈ 0.333.
 
@@ -76,7 +76,7 @@ Each sentence has 3 words, so every word has TF = 1/3 ≈ 0.333.
 | the      | 1           | 3           | 0.333 |
 | platform | 1           | 3           | 0.333 |
 
-**Step 2 — Inverse Document Frequency (IDF)**
+#### Step 2 — Inverse Document Frequency (IDF)
 
 "Atlas" and "the" appear in all 3 documents, so IDF = log10(3/3) = 0.  
  Unique words like "platform", "Titan", and "mountain" appear in only 1 document: IDF = log10(3/1) ≈ 0.477.
@@ -89,7 +89,7 @@ Each sentence has 3 words, so every word has TF = 1/3 ≈ 0.333.
 | Titan    | 3          | 1              | 0.477      |
 | mountain | 3          | 1              | 0.477      |
 
-**Step 3 — TF-IDF Scores**
+#### Step 3 — TF-IDF Scores
 
 Multiply TF × IDF for each word in each document.
 
@@ -141,13 +141,11 @@ For illustration, assume an embedding model projects each sentence onto 6 semant
 
 Semantic search ranks documents by cosine similarity — the cosine of the angle between two vectors in the embedding space. A score of 1 means identical direction (same meaning); 0 means orthogonal (unrelated).  
 
-![alt text](/assets/sparse_dense_vectors_image_3.png)
+![alt text]({{ site.baseurl }}/assets/sparse_dense_vectors_image_3.png)
 
 > Figure 3 — The two vectors point in very different directions, confirming a low cosine similarity (~0.225) despite both sentences containing "Atlas".
 
-**Calculation**
-
-```
+```text
 
 A = [0.9, 0.8, 0.9, 0.1, 0.0, 0.2]   (Sentence 1)
 B = [0.1, 0.2, 0.0, 0.9, 0.8, 0.9]   (Sentence 2)
