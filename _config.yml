@@ -1,8 +1,8 @@
 # Site settings
-title: "MongoDB Vector Search"
-description: "A comprehensive guide to MongoDB Vector Search"
+title: "Krishna's Blog"
+description: "Collections of my learnings"
 url: "https://krishnamohan-seelam.github.io"
-baseurl: "/mongodb-vectorsearch"
+baseurl: "/my-blog"
 
 # Build settings
 markdown: kramdown
