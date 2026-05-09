@@ -16,7 +16,6 @@ title: Home
  <article class="card">
   <a href="{{ post.url | relative_url }}">
    <h3>{{ post.title }}</h3>
-   <p class="excerpt">{{ post.excerpt | strip_html | truncate:120 }}</p>
    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
   </a>
  </article>
