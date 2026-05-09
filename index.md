@@ -3,6 +3,6 @@ layout: home
 title: Home
 ---
 
-Welcome to MongoDB Vector Search Blog!
+Welcome to my blog!
 
-Here you'll find tutorials and guides on implementing vector search in MongoDB Atlas.
+Here you'll find tutorials and guides on technology topics like MongoDB, Agents.
