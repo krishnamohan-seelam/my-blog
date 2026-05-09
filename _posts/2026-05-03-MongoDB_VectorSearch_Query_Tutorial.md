@@ -1,14 +1,12 @@
 ---
 layout: post
-title: "Creating Vector Search Queries in MongoDB Atlas"
+title: "Introduction to  Vector Search Queries in MongoDB Atlas"
 subtitle: "A comprehensive guide to implementing vector search in MongoDB Atlas from generating embeddings to building aggregation pipelines"
 date: 2026-05-03
 categories: [mongodb, python, vector-search]
 tags: [mongodb, python, vector-search]
 image: assets/mongodb_vector_search.png
 ---
-
-# Introduction to  Vector Search Queries in MongoDB Atlas
 
 ![mongodb_vector_search]({{ site.baseurl }}/assets/mongodb_vector_search.png)
 
@@ -685,12 +683,3 @@ for doc in y:
 
 ---
 
-## About the Author
-
-**KrishnaMohan Seelam** — Senior Engineer
-
-I write about developer tools, databases, and applied AI.
-
-If you found this useful, give it a 👏 and follow me for more!
-
-[GitHub](https://github.com/krishnamohan-seelam/)

@@ -6,7 +6,6 @@ date: 2026-04-29
 categories: [mongodb, vector-search, nlp]
 tags: [mongodb, vector-search, tf-idf, embeddings]
 ---
-## Sparse and Dense Vectors in MongoDB Atlas
 
 A guide to TF-IDF, Sparse Vectors, Dense Vectors, and Atlas Vector Search  
 
