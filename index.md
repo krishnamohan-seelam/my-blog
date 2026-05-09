@@ -15,8 +15,10 @@ title: Home
  {% for post in site.posts limit:6 %}
  <article class="card">
   <a href="{{ post.url | relative_url }}">
-   <h3>{{ post.title }}</h3>
+
    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+   <h3> {{ post.title }}</h3>
+
   </a>
  </article>
  {% endfor %}
