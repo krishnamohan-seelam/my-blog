@@ -34,7 +34,7 @@ title: Home
   </div>
 </section>
 
-<section class="about-section">
+<section id="about" class="about-section">
   <div class="container about-inner">
     <span class="about-label">About</span>
     <a href="https://github.com/krishnamohan-seelam/" target="_blank" rel="noopener noreferrer">Krishna Mohan Seelam</a>
