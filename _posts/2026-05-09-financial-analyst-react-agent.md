@@ -20,7 +20,7 @@ In a typical ReAct loop:
 3. **Observation:** The agent receives the output from the tool.
 4. The cycle repeats until the agent has enough information to provide a final **Answer**.
 
-<img src="{{ site.baseurl }}/assets/React_Agent.png" alt="React Agent" style="width: 100vw; max-width: 900px; position: relative; left: 50%; transform: translateX(-50%); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+<img src="{{ site.baseurl }}/assets/React_Agent.png" alt="React Agent" style="width: 80vw; max-width: 900px; position: relative; left: 50%; transform: translateX(-50%); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
 
 
 This structured approach makes ReAct agents highly capable of handling complex, multi-step problems, as they can break them down and verify facts along the way.
