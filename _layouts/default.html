@@ -22,8 +22,7 @@
       fjs.parentNode.appendChild(js);
     }(window, document, 'script', 'webpushr-jssdk'));
     webpushr('setup', { 'key': 'BOVBmIwJcRfc_aUHw1vX2mOw5P9SdESR3VIqpFsVvceGfbcJYGr0bXOO1tkqhrfzmvetU_fMgU2fxE4N_cO3yyw' });
-    // Show the Webpushr subscription bell
-    webpushr('showBell');</script>
+  </script>
   <!-- end webpushr tracking code -->
 </head>
 
@@ -63,7 +62,7 @@
   </script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register({{ '/webpushr-sw.js' | relative_url }})
+      navigator.serviceWorker.register("{{ '/webpushr-sw.js' | relative_url }}")
         .then(function (reg) { console.log('webpushr-sw registered:', reg); })
       .catch(function (err) { console.error('webpushr-sw registration failed:', err); });
     }
