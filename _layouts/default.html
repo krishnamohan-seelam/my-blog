@@ -17,12 +17,9 @@
     }
   </script>
   <!-- start webpushr tracking code -->
-  <script>(function (w, d, s, id) {
-      if (typeof (w.webpushr) !== 'undefined') return; w.webpushr = w.webpushr || function () { (w.webpushr.q = w.webpushr.q || []).push(arguments) }; var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s); js.id = id; js.async = 1; js.src = "https://cdn.webpushr.com/app.min.js";
-      fjs.parentNode.appendChild(js);
-    }(window, document, 'script', 'webpushr-jssdk'));
-    webpushr('setup', { 'key': 'BOVBmIwJcRfc_aUHw1vX2mOw5P9SdESR3VIqpFsVvceGfbcJYGr0bXOO1tkqhrfzmvetU_fMgU2fxE4N_cO3yyw' });
-  </script>
+  <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";
+fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk-alternative'));
+webpushr('init','BOVBmIwJcRfc_aUHw1vX2mOw5P9SdESR3VIqpFsVvceGfbcJYGr0bXOO1tkqhrfzmvetU_fMgU2fxE4N_cO3yyw','https://krishnamohan-seelam.github.io/my-blog/webpushr-sw.js','/my-blog/');</script>
   <!-- end webpushr tracking code -->
 </head>
 
@@ -60,13 +57,7 @@
       localStorage.setItem('theme', targetTheme);
     });
   </script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register("{{ '/webpushr-sw.js' | relative_url }}")
-        .then(function (reg) { console.log('webpushr-sw registered:', reg); })
-      .catch(function (err) { console.error('webpushr-sw registration failed:', err); });
-    }
-  </script>
+
 </body>
 
 </html>
