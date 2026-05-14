@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,12 +16,17 @@
       document.documentElement.setAttribute('data-theme', 'light');
     }
   </script>
-  <!-- start webpushr tracking code --> 
-  <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";
-  fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));
-  webpushr('setup',{'key':'BOVBmIwJcRfc_aUHw1vX2mOw5P9SdESR3VIqpFsVvceGfbcJYGr0bXOO1tkqhrfzmvetU_fMgU2fxE4N_cO3yyw' });</script>
+  <!-- start webpushr tracking code -->
+  <script>(function (w, d, s, id) {
+      if (typeof (w.webpushr) !== 'undefined') return; w.webpushr = w.webpushr || function () { (w.webpushr.q = w.webpushr.q || []).push(arguments) }; var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s); js.id = id; js.async = 1; js.src = "https://cdn.webpushr.com/app.min.js";
+      fjs.parentNode.appendChild(js);
+    }(window, document, 'script', 'webpushr-jssdk'));
+    webpushr('setup', { 'key': 'BOVBmIwJcRfc_aUHw1vX2mOw5P9SdESR3VIqpFsVvceGfbcJYGr0bXOO1tkqhrfzmvetU_fMgU2fxE4N_cO3yyw' });
+    // Show the Webpushr subscription bell
+    webpushr('showBell');</script>
   <!-- end webpushr tracking code -->
 </head>
+
 <body>
 
   <header>
@@ -30,7 +36,8 @@
         <li><a href="{{ '/posts' | relative_url }}">Posts</a></li>
         <li><a href="{{ '/#about' | relative_url }}">About</a></li>
         <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
-        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme" title="Toggle Light/Dark Mode">◐</button></li>
+        <li><button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"
+            title="Toggle Light/Dark Mode">◐</button></li>
       </ul>
     </nav>
   </header>
@@ -49,10 +56,18 @@
         currentTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
       }
       let targetTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
+
       document.documentElement.setAttribute('data-theme', targetTheme);
       localStorage.setItem('theme', targetTheme);
     });
   </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register({{ '/webpushr-sw.js' | relative_url }})
+        .then(function (reg) { console.log('webpushr-sw registered:', reg); })
+      .catch(function (err) { console.error('webpushr-sw registration failed:', err); });
+    }
+  </script>
 </body>
+
 </html>
