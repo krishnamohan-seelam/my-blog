@@ -33,3 +33,8 @@ credentials.yml.enc
 
 # Ignore compiled site assets (if generated elsewhere)
 public/
+
+.venv/
+__pycache__/
+*.py
+pyscripts
