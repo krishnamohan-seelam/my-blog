@@ -12,7 +12,7 @@ theme: minima
 # Author block (used by sidebar, post pages, and SEO)
 author:
   name: "Krishna Mohan Seelam"
-  title: "AI/ML Engineer & Blogger"
+  title: "Software Engineer & Blogger"
   bio: "Exploring how to design and build AI agents — covering LLMs, agentic systems, developer tooling, databases, and practical ways to integrate them."
   avatar: "/my-blog/assets/images/avatar.jpg"
   github: "krishnamohan-seelam"
@@ -62,3 +62,12 @@ defaults:
     values:
       layout: "post"
       author: "Krishna Mohan Seelam"
+
+# Sass / SCSS configuration
+# Silence deprecation warnings from minima theme (uses legacy @import, lighten(), darken())
+# These are third-party warnings — our own SCSS uses the same @import for Jekyll 4 compatibility.
+sass:
+  silence_deprecations:
+    - import
+    - global-builtin
+    - color-functions
