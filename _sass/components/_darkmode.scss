@@ -1,0 +1,7 @@
+/* ============================================================
+   Dark Mode Toggle — _sass/components/_darkmode.scss
+   ============================================================ */
+
+/* Icon swap based on current theme */
+:root .theme-toggle::after { content: "☾"; }
+:root[data-theme="light"] .theme-toggle::after { content: "☀"; }

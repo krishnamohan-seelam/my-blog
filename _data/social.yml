@@ -1,0 +1,14 @@
+# Social links — single source of truth
+# Used by sidebar-profile.html and footer.html
+
+github:
+  url: "https://github.com/krishnamohan-seelam"
+  label: "GitHub"
+
+linkedin:
+  url: "https://www.linkedin.com/in/krishnamohan-seelam"
+  label: "LinkedIn"
+
+rss:
+  url: "/my-blog/feed.xml"
+  label: "RSS Feed"

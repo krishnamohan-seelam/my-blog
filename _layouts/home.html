@@ -1,0 +1,103 @@
+---
+layout: default
+---
+
+<div class="container--wide">
+
+  <!-- Hero -->
+  <div class="home-hero">
+    <p class="home-hero__tag">// Technical writing</p>
+    <h1 class="home-hero__title">Developer tooling for <em>AI agents</em></h1>
+    <p class="home-hero__desc">Practical tutorials, deep dives, and walkthroughs on building with Gen AI — LLMs, agentic systems, databases, and more.</p>
+  </div>
+
+  <!-- Two-column grid -->
+  <div class="home-grid">
+
+    <!-- Main: post list -->
+    <main class="home-main" id="posts">
+
+      <!-- Tag filter chips -->
+      {% assign all_tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
+      {% if all_tags.size > 0 %}
+      <div class="tag-filter-bar" role="group" aria-label="Filter posts by tag">
+        <button class="tag-filter-chip active"
+                data-tag-filter="all"
+                aria-pressed="true">All</button>
+        {% for tag in all_tags %}
+          {% assign tag_stripped = tag | strip %}
+          {% if tag_stripped != '' %}
+          <button class="tag-filter-chip"
+                  data-tag-filter="{{ tag_stripped | downcase }}"
+                  aria-pressed="false">{{ tag_stripped }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Posts count -->
+      <div class="posts-header">
+        <span class="posts-label">Latest posts</span>
+        <span class="posts-count">
+          <span id="posts-shown-count">{{ site.posts | size }}</span> entries
+        </span>
+      </div>
+
+      <!-- Post list -->
+      <div class="post-list" id="post-list">
+        {% if paginator %}
+          {% assign posts_to_show = paginator.posts %}
+        {% else %}
+          {% assign posts_to_show = site.posts %}
+        {% endif %}
+
+        {% for post in posts_to_show %}
+          {% include post-card.html post=post %}
+        {% endfor %}
+
+        {% if posts_to_show.size == 0 %}
+        <p style="color: var(--text-muted); font-size: 15px; padding: 2rem 0;">
+          No posts found for this tag. <button class="tag-filter-chip active" data-tag-filter="all">View all →</button>
+        </p>
+        {% endif %}
+      </div>
+
+      <!-- Pagination -->
+      {% if paginator and paginator.total_pages > 1 %}
+      <nav class="pagination" aria-label="Post pagination">
+        {% if paginator.previous_page %}
+          <a class="pagination__link pagination__prev"
+             href="{{ paginator.previous_page_path | relative_url }}"
+             aria-label="Previous page">← Prev</a>
+        {% endif %}
+
+        {% for page_num in (1..paginator.total_pages) %}
+          {% if page_num == paginator.page %}
+            <span class="pagination__current" aria-current="page">{{ page_num }}</span>
+          {% elsif page_num == 1 %}
+            <a class="pagination__link" href="{{ '/' | relative_url }}" aria-label="Page 1">1</a>
+          {% else %}
+            <a class="pagination__link"
+               href="{{ site.paginate_path | replace: ':num', page_num | relative_url }}"
+               aria-label="Page {{ page_num }}">{{ page_num }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+          <a class="pagination__link pagination__next"
+             href="{{ paginator.next_page_path | relative_url }}"
+             aria-label="Next page">Next →</a>
+        {% endif %}
+      </nav>
+      {% endif %}
+
+    </main>
+
+    <!-- Sidebar -->
+    {% include sidebar-profile.html %}
+
+  </div><!-- /.home-grid -->
+</div><!-- /.container--wide -->
+
+<!-- Tag filter script -->
+<script defer src="{{ '/assets/js/tag-filter.js' | relative_url }}"></script>

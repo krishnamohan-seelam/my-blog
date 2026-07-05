@@ -1,0 +1,192 @@
+/* ============================================================
+   Share Buttons — _sass/components/_share.scss
+   ============================================================ */
+
+.share-buttons {
+  display: flex;
+  align-items: center;
+  gap: $sp-8;
+  margin: $sp-32 0;
+  flex-wrap: wrap;
+}
+
+.share-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: $sp-4;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $sp-8;
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  border: 0.5px solid var(--border-mid);
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-bg);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.share-btn--copy {
+  &.copied {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+}
+
+/* ── Post Navigation (prev/next) ────────────────────────────── */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-16;
+  margin: $sp-48 0;
+  padding-top: $sp-32;
+  border-top: 0.5px solid var(--border);
+
+  @media (max-width: $bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.post-nav__item {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-8;
+  padding: $sp-16;
+  border: 0.5px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  background: var(--bg-card);
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &--next {
+    text-align: right;
+    align-items: flex-end;
+  }
+}
+
+.post-nav__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.post-nav__title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.4;
+  transition: color 0.15s;
+
+  .post-nav__item:hover & {
+    color: var(--accent);
+  }
+}
+
+/* ── Copy Code Button ───────────────────────────────────────── */
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--bg-hover);
+  border: 0.5px solid var(--border-mid);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.15s ease;
+  z-index: 1;
+
+  &:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .pre-wrapper:hover & {
+    opacity: 1;
+  }
+}
+
+.pre-wrapper {
+  position: relative;
+
+  &:hover .copy-btn {
+    opacity: 1;
+  }
+}
+
+/* ── Back to Top ────────────────────────────────────────────── */
+.back-to-top {
+  display: none;
+  position: fixed;
+  bottom: $sp-32;
+  right: $sp-32;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border-mid);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  z-index: 50;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  &.visible { display: flex; }
+
+  @media (max-width: $bp-mobile) {
+    bottom: $sp-16;
+    right: $sp-16;
+  }
+}

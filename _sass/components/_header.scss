@@ -1,0 +1,176 @@
+/* ============================================================
+   Header / Nav — _sass/components/_header.scss
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 0.5px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+/* ── Nav Inner ──────────────────────────────────────────────── */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--nav-height);
+  padding: 0 $sp-32;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+
+  @media (max-width: $bp-mobile) {
+    padding: 0 $sp-16;
+  }
+}
+
+/* ── Logo ───────────────────────────────────────────────────── */
+.site-logo {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.75; }
+}
+
+/* ── Nav Links ──────────────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: $sp-8;
+  list-style: none;
+}
+
+.nav-links a,
+.nav-links button {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--text);
+    background: var(--bg-hover);
+  }
+
+  &.active {
+    color: var(--accent);
+  }
+}
+
+/* ── RSS Icon Link ──────────────────────────────────────────── */
+.nav-rss {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  transition: all 0.15s;
+
+  &:hover {
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+  }
+}
+
+/* ── Theme Toggle ───────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 0.5px solid var(--border-mid);
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
+}
+
+/* ── Hamburger (mobile) ─────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 0.5px solid var(--border-mid);
+  color: var(--text-muted);
+  transition: all 0.15s;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-bg);
+  }
+
+  @media (max-width: $bp-mobile) {
+    display: flex;
+  }
+}
+
+/* Mobile nav open state */
+.nav-links--mobile-open {
+  @media (max-width: $bp-mobile) {
+    position: fixed;
+    inset: var(--nav-height) 0 0 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $sp-24;
+    gap: $sp-4;
+    border-top: 0.5px solid var(--border);
+    z-index: 99;
+    overflow-y: auto;
+
+    li { width: 100%; }
+
+    a, button {
+      display: block;
+      width: 100%;
+      padding: 10px $sp-12;
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .nav-links:not(.nav-links--mobile-open) {
+    display: none;
+  }
+}

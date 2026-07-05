@@ -1,6 +1,6 @@
 # Site settings
 title: "Krishna's Blog"
-description: "Collections of my learnings"
+description: "Practical tutorials on building AI agents, LLMs, and developer tooling."
 url: "https://krishnamohan-seelam.github.io"
 baseurl: "/my-blog"
 
@@ -9,17 +9,56 @@ markdown: kramdown
 highlighter: rouge
 theme: minima
 
+# Author block (used by sidebar, post pages, and SEO)
+author:
+  name: "Krishna Mohan Seelam"
+  title: "AI/ML Engineer & Blogger"
+  bio: "Exploring how to design and build AI agents — covering LLMs, agentic systems, developer tooling, databases, and practical ways to integrate them."
+  avatar: "/my-blog/assets/images/avatar.jpg"
+  github: "krishnamohan-seelam"
+  linkedin: "krishnamohan-seelam"
+  twitter: ""
+
 # Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-seo-tag
+
+# Pagination (jekyll-paginate v1)
+paginate: 6
+paginate_path: "/page/:num/"
 
 # Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
   - vendor/
+  - pyscripts/
+  - blog-uiux-redesign-plan.md
 
 # Include
 include:
   - _pages
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# SEO tag plugin
+twitter:
+  username: ""
+
+# Defaults
+defaults:
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Krishna Mohan Seelam"

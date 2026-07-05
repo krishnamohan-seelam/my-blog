@@ -1,0 +1,122 @@
+/* ============================================================
+   Table of Contents — _sass/components/_toc.scss
+   ============================================================ */
+
+.toc-panel {
+  position: sticky;
+  top: calc(var(--nav-height) + $sp-24);
+  max-height: calc(100vh - var(--nav-height) - $sp-64);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: $sp-24;
+  border-left: 0.5px solid var(--border);
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+
+  @media (max-width: $bp-desktop) {
+    display: none; /* hidden on tablet/mobile */
+  }
+}
+
+.toc-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: $sp-12;
+  display: block;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-list li {
+  margin-bottom: 2px;
+}
+
+.toc-link {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  padding: 3px 0;
+  border-left: 2px solid transparent;
+  padding-left: $sp-8;
+  margin-left: -#{$sp-8};
+  transition: all 0.15s ease;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+
+  &:hover {
+    color: var(--text-muted);
+    border-left-color: var(--border-mid);
+  }
+
+  &.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+}
+
+/* H3 indented */
+.toc-link--h3 {
+  padding-left: $sp-16;
+  margin-left: -#{$sp-8};
+  font-size: 11px;
+}
+
+/* ── Mobile TOC (collapsible) ───────────────────────────────── */
+.toc-mobile {
+  border: 0.5px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  margin-bottom: $sp-32;
+  overflow: hidden;
+
+  @media (min-width: $bp-desktop) {
+    display: none; /* shown on mobile only */
+  }
+}
+
+.toc-mobile__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: $sp-12 $sp-16;
+  background: var(--bg-subtle);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  transition: background 0.15s;
+
+  &:hover { background: var(--bg-hover); }
+
+  .toc-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  &[aria-expanded="true"] .toc-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.toc-mobile__content {
+  padding: $sp-12 $sp-16;
+  display: none;
+
+  &.open { display: block; }
+}

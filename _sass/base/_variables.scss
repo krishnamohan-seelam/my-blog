@@ -1,0 +1,80 @@
+/* ============================================================
+   Design Tokens — _sass/base/_variables.scss
+   ============================================================ */
+
+/* ── Dark Mode (default) ────────────────────────────────────── */
+:root {
+  --bg:           #0d0d0d;
+  --bg-subtle:    #111111;
+  --bg-card:      #141414;
+  --bg-hover:     #181818;
+  --border:       #1e1e1e;
+  --border-mid:   #2a2a2a;
+  --text:         #e8e4dc;
+  --text-muted:   #6b7280;
+  --text-dim:     #4b5563;
+  --accent:       #6ee7b7;
+  --accent-hover: #a7f3d0;
+  --accent-bg:    rgba(110, 231, 183, 0.10);
+  --heading-color:#f5f0e8;
+  --code-bg:      #1a1a1a;
+  --pre-bg:       #111111;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.45);
+  --shadow-sm:    0 2px 8px  rgba(0, 0, 0, 0.25);
+  --shadow-card:  0 1px 3px  rgba(0, 0, 0, 0.3);
+
+  /* Fonts */
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono:  'DM Mono', 'Courier New', monospace;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+
+  /* Layout */
+  --container-wide:  1100px;
+  --container:        720px;
+  --content-width:    680px;
+  --sidebar-width:    268px;
+  --home-gap:          48px;
+  --nav-height:        64px;
+  --radius:             2px;
+  --radius-md:          6px;
+  --radius-lg:         12px;
+  --progress-height:    3px;
+}
+
+/* ── Light Mode ─────────────────────────────────────────────── */
+:root[data-theme="light"] {
+  --bg:           #ffffff;
+  --bg-subtle:    #f9fafb;
+  --bg-card:      #ffffff;
+  --bg-hover:     #f3f4f6;
+  --border:       #e5e7eb;
+  --border-mid:   #d1d5db;
+  --text:         #111827;
+  --text-muted:   #4b5563;
+  --text-dim:     #9ca3af;
+  --accent:       #059669;
+  --accent-hover: #047857;
+  --accent-bg:    rgba(5, 150, 105, 0.08);
+  --heading-color:#111827;
+  --code-bg:      #f3f4f6;
+  --pre-bg:       #f9fafb;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sm:    0 2px 8px  rgba(0, 0, 0, 0.06);
+  --shadow-card:  0 1px 3px  rgba(0, 0, 0, 0.07);
+}
+
+/* ── SCSS Spacing Scale ─────────────────────────────────────── */
+$sp-4:  4px;
+$sp-8:  8px;
+$sp-10: 10px;
+$sp-12: 12px;
+$sp-16: 16px;
+$sp-24: 24px;
+$sp-32: 32px;
+$sp-48: 48px;
+$sp-64: 64px;
+
+/* ── Breakpoints ────────────────────────────────────────────── */
+$bp-mobile:  640px;
+$bp-tablet:  768px;
+$bp-desktop: 1024px;

@@ -1,0 +1,80 @@
+/* ============================================================
+   Footer — _sass/components/_footer.scss
+   ============================================================ */
+
+.site-footer {
+  margin-top: $sp-64;
+  border-top: 0.5px solid var(--border);
+  padding: $sp-32 0;
+}
+
+.site-footer__inner {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 $sp-32;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $sp-16;
+
+  @media (max-width: $bp-mobile) {
+    padding: 0 $sp-16;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.site-footer__copy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+
+  a {
+    color: var(--text-muted);
+    transition: color 0.15s;
+
+    &:hover { color: var(--accent); }
+  }
+}
+
+.site-footer__social {
+  display: flex;
+  gap: $sp-12;
+  align-items: center;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--text-dim);
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+}
+
+.site-footer__built {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+
+  a {
+    color: var(--text-muted);
+    transition: color 0.15s;
+    &:hover { color: var(--accent); }
+  }
+}

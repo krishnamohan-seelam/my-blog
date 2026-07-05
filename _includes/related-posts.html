@@ -1,0 +1,37 @@
+{% comment %}
+  related-posts.html — 2-3 posts sharing at least one tag with current post
+  Included at the bottom of post.html
+{% endcomment %}
+
+{% assign max_related = 3 %}
+{% assign related = "" | split: "" %}
+{% assign current_tags = page.tags %}
+
+{% for post in site.posts %}
+  {% if post.url == page.url %}{% continue %}{% endif %}
+  {% for tag in current_tags %}
+    {% if post.tags contains tag %}
+      {% unless related contains post %}
+        {% assign related = related | push: post %}
+      {% endunless %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  {% if related.size >= max_related %}{% break %}{% endif %}
+{% endfor %}
+
+{% if related.size > 0 %}
+<div class="related-posts">
+  <h3>Related Posts</h3>
+  <div class="related-posts__grid">
+    {% for post in related %}
+    <a class="related-post-card" href="{{ post.url | relative_url }}">
+      <p class="related-post-card__date">
+        {{ post.date | date: "%b %-d, %Y" }}
+      </p>
+      <p class="related-post-card__title">{{ post.title }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

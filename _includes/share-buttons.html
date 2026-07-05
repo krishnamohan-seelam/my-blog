@@ -1,0 +1,57 @@
+{% assign share_title = page.title | url_encode %}
+{% assign share_url   = page.url | absolute_url | url_encode %}
+
+<div class="share-buttons" aria-label="Share this post">
+  <span class="share-label">Share</span>
+
+  <!-- Twitter/X -->
+  <a class="share-btn"
+     href="https://twitter.com/intent/tweet?text={{ share_title }}&url={{ share_url }}"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Share on Twitter/X">
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+    </svg>
+    X
+  </a>
+
+  <!-- LinkedIn -->
+  <a class="share-btn"
+     href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Share on LinkedIn">
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
+    </svg>
+    LinkedIn
+  </a>
+
+  <!-- Copy link -->
+  <button class="share-btn share-btn--copy"
+          id="copy-link-btn"
+          data-url="{{ page.url | absolute_url }}"
+          aria-label="Copy link to clipboard">
+    <svg viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25Zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0Z"/>
+    </svg>
+    Copy link
+  </button>
+</div>
+
+<script>
+(function() {
+  var btn = document.getElementById('copy-link-btn');
+  if (!btn) return;
+  btn.addEventListener('click', function() {
+    var url = btn.dataset.url;
+    navigator.clipboard.writeText(url).then(function() {
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.innerHTML = `<svg viewBox="0 0 16 16" aria-hidden="true" width="14" height="14" fill="currentColor"><path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25Zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0Z"/></svg> Copy link`;
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+})();
+</script>

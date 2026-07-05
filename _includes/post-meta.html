@@ -1,0 +1,16 @@
+{% assign words = include.post.content | number_of_words %}
+{% assign minutes = words | divided_by: 200 %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+<span class="post-date">
+  <time datetime="{{ include.post.date | date_to_xmlschema }}">
+    {{ include.post.date | date: "%b %-d, %Y" }}
+  </time>
+</span>
+<span class="meta-sep">·</span>
+<span class="reading-time">{{ minutes }} min read</span>
+{% if include.post.tags.size > 0 %}
+  <span class="meta-sep">·</span>
+  {% for tag in include.post.tags limit:2 %}
+    <a href="{{ '/tags/' | append: tag | slugify | relative_url }}" class="tag-pill">{{ tag }}</a>
+  {% endfor %}
+{% endif %}

@@ -1,0 +1,59 @@
+{% comment %}
+  post-card.html
+  Usage: {% include post-card.html post=post %}
+{% endcomment %}
+{% assign post = include.post %}
+{% assign words = post.content | number_of_words %}
+{% assign minutes = words | divided_by: 200 %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+{% assign now_days = 'now' | date: '%s' | divided_by: 86400 %}
+{% assign post_days = post.date | date: '%s' | divided_by: 86400 %}
+{% assign days_old = now_days | minus: post_days %}
+{% assign is_new = false %}
+{% if days_old <= 14 %}{% assign is_new = true %}{% endif %}
+
+<article class="post-card {% if post.cover_image %}post-card--with-image{% endif %}"
+         data-post-tags="{{ post.tags | join: ', ' }}"
+         role="article">
+
+  {% if post.cover_image %}
+  <div class="post-card__thumb">
+    <a href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">
+      <img src="{{ post.cover_image | relative_url }}"
+           alt="{{ post.title }} cover"
+           loading="lazy" width="100" height="72">
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="post-card__body">
+    <div class="post-card__meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">
+        {{ post.date | date: "%b %-d, %Y" }}
+      </time>
+      <span class="meta-sep">·</span>
+      <span class="reading-time">{{ minutes }} min read</span>
+      {% if is_new %}
+        <span class="meta-sep">·</span>
+        <span class="post-card__new-badge" aria-label="New post">NEW</span>
+      {% endif %}
+      {% for tag in post.tags limit:2 %}
+        <a href="{{ '/tags/' | append: tag | downcase | replace: ' ', '-' | relative_url }}"
+           class="tag-pill" aria-label="Posts tagged {{ tag }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+
+    <h2 class="post-card__title">
+      <a href="{{ post.url | relative_url }}">
+        {{ post.title }}
+        <span class="post-card__arrow" aria-hidden="true">→</span>
+      </a>
+    </h2>
+
+    {% if post.description %}
+      <p class="post-card__excerpt">{{ post.description | strip_html | truncate: 160 }}</p>
+    {% elsif post.excerpt %}
+      <p class="post-card__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,61 @@
+<header class="site-header" role="banner">
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      {{ site.title | default: "dev.log" }}
+    </a>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      <li>
+        <a href="{{ '/' | relative_url }}"
+           {% if page.url == '/' %}class="active" aria-current="page"{% endif %}>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/posts' | relative_url }}"
+           {% if page.url contains '/posts' %}class="active" aria-current="page"{% endif %}>
+          Posts
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/tags' | relative_url }}"
+           {% if page.url contains '/tags' %}class="active" aria-current="page"{% endif %}>
+          Tags
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/about' | relative_url }}"
+           {% if page.url contains '/about' %}class="active" aria-current="page"{% endif %}>
+          About
+        </a>
+      </li>
+      <li>
+        <a href="{{ '/feed.xml' | relative_url }}"
+           class="nav-rss"
+           aria-label="RSS Feed"
+           title="Subscribe via RSS">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M2.002 2.725a.75.75 0 0 1 .797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 0 1-1.497.098A11.5 11.5 0 0 0 2.7 3.522a.75.75 0 0 1-.698-.797ZM2 9.25a.75.75 0 0 1 .75-.75 5.5 5.5 0 0 1 5.5 5.5.75.75 0 0 1-1.5 0A4 4 0 0 0 2.75 10 .75.75 0 0 1 2 9.25ZM3.25 12a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <button id="theme-toggle"
+                class="theme-toggle"
+                aria-label="Toggle theme"
+                title="Toggle light/dark mode">
+        </button>
+      </li>
+    </ul>
+
+    <button class="nav-hamburger"
+            id="nav-hamburger"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="nav-links">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+</header>

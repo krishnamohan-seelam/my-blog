@@ -1,0 +1,195 @@
+/* ============================================================
+   Typography — _sass/base/_typography.scss
+   ============================================================ */
+
+/* Google Fonts loaded in default.html <head> via <link> for performance.
+   @import kept here as a fallback for non-layout contexts. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+/* ── Article / Post Body ────────────────────────────────────── */
+.post-content {
+  font-size: 18px;
+  line-height: 1.82;
+  color: var(--text);
+  font-family: var(--font-sans);
+
+  /* Paragraphs */
+  p {
+    margin-bottom: 1.5em;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  /* Headings */
+  h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--heading-color);
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: clamp(26px, 3.5vw, 34px);
+    margin: 2.5em 0 0.7em;
+    padding-top: 0.25em;
+
+    /* Offset for sticky TOC / progress bar */
+    scroll-margin-top: calc(var(--nav-height) + 32px);
+  }
+
+  h3 {
+    font-size: clamp(21px, 2.5vw, 26px);
+    margin: 2em 0 0.6em;
+    scroll-margin-top: calc(var(--nav-height) + 32px);
+  }
+
+  h4 {
+    font-size: 20px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    margin: 1.75em 0 0.5em;
+    scroll-margin-top: calc(var(--nav-height) + 32px);
+  }
+
+  /* Links */
+  a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent-bg);
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: var(--accent);
+    }
+  }
+
+  /* Lists */
+  ul, ol {
+    margin: 0.75em 0 1.4em 1.4em;
+    list-style: revert;
+
+    li {
+      margin-bottom: 0.45em;
+      line-height: 1.75;
+    }
+  }
+
+  /* Blockquote */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.6em 0 0.6em 1.5em;
+    margin: 2em 0;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.05em;
+    line-height: 1.75;
+
+    p { margin-bottom: 0.5em; }
+    p:last-child { margin-bottom: 0; }
+  }
+
+  /* Horizontal rule */
+  hr {
+    border: none;
+    border-top: 0.5px solid var(--border-mid);
+    margin: 3em 0;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 2.5em auto;
+    border-radius: var(--radius-md);
+    loading: lazy;
+  }
+
+  /* Figure captions */
+  figcaption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    margin-top: -2em;
+    margin-bottom: 2.5em;
+  }
+
+  /* Inline code */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.83em;
+    background: var(--code-bg);
+    color: var(--accent);
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius);
+  }
+
+  /* Code blocks */
+  pre {
+    position: relative;
+    background: var(--pre-bg);
+    border: 0.5px solid var(--border-mid);
+    border-radius: var(--radius-md);
+    padding: 1.4rem 1.5rem;
+    overflow-x: auto;
+    margin: 2em 0;
+    line-height: 1.65;
+
+    /* Language label injected by copy-code.js */
+    &[data-lang]::before {
+      content: attr(data-lang);
+      position: absolute;
+      top: 0;
+      right: 44px; /* space for copy btn */
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      padding: 6px 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    code {
+      background: none;
+      color: var(--text);
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      border-radius: 0;
+    }
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.25em 0;
+    font-size: 15px;
+    text-align: left;
+    overflow-x: auto;
+    display: block;
+
+    th, td {
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-mid);
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--heading-color);
+      background: var(--bg-subtle);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr:hover td {
+      background: var(--bg-subtle);
+      transition: background 0.1s;
+    }
+  }
+}

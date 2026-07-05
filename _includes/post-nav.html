@@ -1,0 +1,30 @@
+{% comment %}
+  post-nav.html — Previous / Next post navigation
+  Included at the bottom of post.html
+{% endcomment %}
+
+{% if page.previous or page.next %}
+<nav class="post-nav" aria-label="Post navigation">
+
+  {% if page.previous %}
+  <a class="post-nav__item post-nav__item--prev"
+     href="{{ page.previous.url | relative_url }}"
+     rel="prev">
+    <span class="post-nav__label">← Previous</span>
+    <span class="post-nav__title">{{ page.previous.title }}</span>
+  </a>
+  {% else %}
+  <div class="post-nav__item post-nav__item--prev" aria-hidden="true"></div>
+  {% endif %}
+
+  {% if page.next %}
+  <a class="post-nav__item post-nav__item--next"
+     href="{{ page.next.url | relative_url }}"
+     rel="next">
+    <span class="post-nav__label">Next →</span>
+    <span class="post-nav__title">{{ page.next.title }}</span>
+  </a>
+  {% endif %}
+
+</nav>
+{% endif %}

@@ -2,16 +2,129 @@
 layout: default
 ---
 
-<div class="container">
-  <header class="post-header">
-    <div class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-      {% if page.tags.first %}<span class="post-tag">{{ page.tags.first }}</span>{% endif %}
+<!-- Reading progress bar -->
+<div id="reading-progress" role="progressbar" aria-hidden="true"></div>
+
+<div class="post-wrapper">
+
+  <!-- Hero -->
+  <header class="post-hero">
+
+    <!-- Tag pills -->
+    {% if page.tags.size > 0 %}
+    <div class="post-hero__tags">
+      {% for tag in page.tags %}
+        <a href="{{ '/tags/' | append: tag | downcase | replace: ' ', '-' | relative_url }}"
+           class="tag-pill">{{ tag }}</a>
+      {% endfor %}
     </div>
-    <h1>{{ page.title }}</h1>
+    {% endif %}
+
+    <!-- Title -->
+    <h1 class="post-hero__title">{{ page.title }}</h1>
+
+    <!-- Meta -->
+    <div class="post-hero__meta">
+      {% if site.author.name %}
+      <div class="post-hero__author">
+        <img src="{{ site.author.avatar | default: '/assets/images/avatar.jpg' | relative_url }}"
+             alt="{{ site.author.name }}"
+             width="28" height="28"
+             loading="lazy">
+        <span>{{ site.author.name }}</span>
+      </div>
+      <span>·</span>
+      {% endif %}
+      <time datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      <span>·</span>
+      {% assign words = content | number_of_words %}
+      {% assign minutes = words | divided_by: 200 %}
+      {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+      <span>{{ minutes }} min read</span>
+    </div>
+
+    <!-- Cover image -->
+    {% if page.cover_image %}
+    <div class="post-hero__cover">
+      <img src="{{ page.cover_image | relative_url }}"
+           alt="{{ page.title }} cover image"
+           loading="lazy">
+    </div>
+    {% endif %}
+
   </header>
 
-  <article class="post-content">
-    {{ content }}
-  </article>
-</div>
+  <!-- Mobile TOC (above article) -->
+  <div id="toc-mobile-container">
+    {% include toc.html %}
+  </div>
+
+  <!-- Article body + Desktop TOC -->
+  <div class="post-body-layout">
+
+    <article class="post-content" id="post-content" aria-label="Article content">
+      {{ content }}
+    </article>
+
+    <!-- Desktop TOC (right column, sticky) -->
+    <aside aria-label="Table of contents" id="toc-desktop-container">
+      {% include toc.html %}
+    </aside>
+
+  </div>
+
+  <!-- Article footer -->
+  <footer class="post-article-footer">
+
+    <!-- Tags -->
+    {% if page.tags.size > 0 %}
+    <div class="post-tags-footer">
+      <span class="tags-label">Tagged</span>
+      {% for tag in page.tags %}
+        <a href="{{ '/tags/' | append: tag | downcase | replace: ' ', '-' | relative_url }}"
+           class="tag-pill">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Share -->
+    {% include share-buttons.html %}
+
+    <!-- Author card -->
+    {% if site.author.name %}
+    <div class="author-card">
+      <img src="{{ site.author.avatar | default: '/assets/images/avatar.jpg' | relative_url }}"
+           alt="{{ site.author.name }}"
+           width="56" height="56"
+           loading="lazy">
+      <div class="author-card__info">
+        <p class="author-card__name">{{ site.author.name }}</p>
+        {% if site.author.title %}
+        <p class="author-card__title">{{ site.author.title }}</p>
+        {% endif %}
+        {% if site.author.bio %}
+        <p class="author-card__bio">{{ site.author.bio }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Prev / Next navigation -->
+    {% include post-nav.html %}
+
+    <!-- Related posts -->
+    {% include related-posts.html %}
+
+  </footer>
+
+</div><!-- /.post-wrapper -->
+
+<!-- Back to top button -->
+<button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+<!-- Post JS -->
+<script defer src="{{ '/assets/js/copy-code.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/toc-scrollspy.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/reading-progress.js' | relative_url }}"></script>
