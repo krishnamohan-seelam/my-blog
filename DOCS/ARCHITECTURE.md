@@ -130,3 +130,15 @@ Only allowlisted gems used:
 - `jekyll-sitemap` ✅
 
 `jekyll-archives` is **not** used (not allowlisted). Tag pages are handled by `_pages/tags.md` (all-tags) and `_layouts/tag-archive.html` (manual per-tag pages).
+
+### CI/CD and Platform Compatibility
+To support building on local Windows environments and deploying on GitHub Actions runner (`ubuntu-latest`), the `Gemfile.lock` includes platform definitions for:
+- `x64-mingw-ucrt` (Local Windows development)
+- `x86_64-linux` (GitHub Actions workflow runner)
+- `ruby` (Generic fallback)
+
+If the lockfile goes out of sync with new platforms, add platforms using:
+```bash
+bundle lock --add-platform x86_64-linux
+bundle lock --add-platform ruby
+```
