@@ -10,6 +10,7 @@
 
 {% if total_headings >= 3 and page.toc != false %}
 
+{% if include.type == 'desktop' or include.type == nil %}
 <!-- Desktop TOC (sticky) -->
 <div class="toc-panel" aria-label="Table of contents" id="toc-desktop">
   <span class="toc-label">Contents</span>
@@ -17,7 +18,9 @@
     <!-- Populated by toc-scrollspy.js -->
   </ul>
 </div>
+{% endif %}
 
+{% if include.type == 'mobile' or include.type == nil %}
 <!-- Mobile TOC (collapsible, shown above article) -->
 <div class="toc-mobile">
   <button class="toc-mobile__toggle"
@@ -32,5 +35,6 @@
     </ul>
   </div>
 </div>
+{% endif %}
 
 {% endif %}

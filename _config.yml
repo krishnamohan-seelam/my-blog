@@ -14,9 +14,9 @@ author:
   name: "Krishna Mohan Seelam"
   title: "Software Engineer & Blogger"
   bio: "Exploring how to design and build AI agents — covering LLMs, agentic systems, developer tooling, databases, and practical ways to integrate them."
-  avatar: "/my-blog/assets/images/avatar.jpg"
+  avatar: "/assets/images/avatar.jpg"
   github: "krishnamohan-seelam"
-  linkedin: "krishnamohan-seelam"
+  linkedin: "krishnamohanseelam"
   twitter: ""
 
 # Plugins

@@ -39,7 +39,7 @@ layout: default
         {{ page.date | date: "%B %-d, %Y" }}
       </time>
       <span>·</span>
-      {% assign words = content | number_of_words %}
+      {% assign words = content | strip_html | number_of_words %}
       {% assign minutes = words | divided_by: 200 %}
       {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
       <span>{{ minutes }} min read</span>
@@ -58,7 +58,7 @@ layout: default
 
   <!-- Mobile TOC (above article) -->
   <div id="toc-mobile-container">
-    {% include toc.html %}
+    {% include toc.html type="mobile" %}
   </div>
 
   <!-- Article body + Desktop TOC -->
@@ -70,7 +70,7 @@ layout: default
 
     <!-- Desktop TOC (right column, sticky) -->
     <aside aria-label="Table of contents" id="toc-desktop-container">
-      {% include toc.html %}
+      {% include toc.html type="desktop" %}
     </aside>
 
   </div>

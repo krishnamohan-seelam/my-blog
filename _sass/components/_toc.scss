@@ -10,6 +10,7 @@
   overflow-x: hidden;
   padding-left: $sp-24;
   border-left: 0.5px solid var(--border);
+  text-align: left;
 
   /* Hide scrollbar */
   scrollbar-width: none;
@@ -28,6 +29,7 @@
   text-transform: uppercase;
   margin-bottom: $sp-12;
   display: block;
+  text-align: left;
 }
 
 .toc-list {
@@ -54,7 +56,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 180px;
+  max-width: 220px;
 
   &:hover {
     color: var(--text-muted);

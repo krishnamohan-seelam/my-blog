@@ -4,7 +4,7 @@
 
 /* ── Post Wrapper ───────────────────────────────────────────── */
 .post-wrapper {
-  max-width: var(--container);
+  max-width: var(--container-wide);
   margin: 0 auto;
   padding: 0 $sp-32;
 
@@ -80,8 +80,8 @@
 /* ── Post Body Layout (content + TOC) ──────────────────────── */
 .post-body-layout {
   display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: $sp-64;
+  grid-template-columns: 1fr 240px;
+  gap: $sp-48;
   align-items: start;
   position: relative;
 
@@ -92,7 +92,6 @@
 }
 
 .post-body-layout .post-content {
-  max-width: var(--content-width);
   min-width: 0;
 }
 

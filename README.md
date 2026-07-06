@@ -83,4 +83,4 @@ cover_image: /assets/images/your-cover.jpg  # optional
 
 ## Author
 
-**Krishna Mohan Seelam** — [GitHub](https://github.com/krishnamohan-seelam) · [LinkedIn](https://www.linkedin.com/in/krishnamohan-seelam)
+**Krishna Mohan Seelam** — [GitHub](https://github.com/krishnamohan-seelam) · [LinkedIn](https://www.linkedin.com/in/krishnamohanseelam)

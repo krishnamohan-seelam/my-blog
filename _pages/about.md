@@ -22,5 +22,5 @@ Building production-grade AI agents: from financial analysts to trip planners to
 ## Connect
 
 - [GitHub](https://github.com/krishnamohan-seelam) — source code for all tutorials
-- [LinkedIn](https://www.linkedin.com/in/krishnamohan-seelam) — professional updates
+- [LinkedIn](https://www.linkedin.com/in/krishnamohanseelam) — professional updates
 - [RSS Feed](/my-blog/feed.xml) — subscribe for new posts
