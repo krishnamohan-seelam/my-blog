@@ -33,7 +33,7 @@ A technical blog covering hands-on tutorials and deep dives on:
 - 🏷️ **Tag filter chips** — client-side filter, no page reload
 - 📖 **Reading experience** — 18px body, 680px content width, 1.82 line-height
 - 📊 **Reading progress bar** — thin accent bar at top of post pages
-- 📋 **Table of contents** — sticky desktop, collapsible mobile; 3+ headings auto-trigger
+- 📋 **Table of contents** — dynamically generated in JS, sticky desktop, collapsible mobile; 3+ headings auto-trigger
 - 📋 **Copy code button** — on all code blocks with language label
 - 🔗 **Share buttons** — Twitter/X, LinkedIn, copy-link
 - 🔄 **Post navigation** — prev/next with title

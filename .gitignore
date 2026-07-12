@@ -38,3 +38,5 @@ public/
 __pycache__/
 *.py
 pyscripts
+
+DOCS/

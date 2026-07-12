@@ -58,7 +58,7 @@ assets/
     theme-toggle.js        # Dark/light toggle + mobile hamburger
     tag-filter.js          # Client-side tag filtering on home page
     copy-code.js           # Copy button for code blocks
-    toc-scrollspy.js       # IntersectionObserver TOC highlight
+    toc-scrollspy.js       # Dynamic TOC generator & IntersectionObserver highlight
     reading-progress.js    # Scroll-based progress bar
 
 _data/
@@ -116,7 +116,7 @@ _posts/*.md (layout: post)
 | `theme-toggle.js` | `DOMContentLoaded` | Toggle light/dark, persist localStorage, hamburger |
 | `tag-filter.js` | `DOMContentLoaded` | Filter post cards by `data-post-tags` |
 | `copy-code.js` | `DOMContentLoaded` | Inject copy buttons into all `<pre>` blocks |
-| `toc-scrollspy.js` | `DOMContentLoaded` | IntersectionObserver highlights active TOC link |
+| `toc-scrollspy.js` | `DOMContentLoaded` | Dynamically generates TOC links from `h2`/`h3` headings and uses IntersectionObserver to highlight active TOC link |
 | `reading-progress.js` | `scroll` (passive) | Update progress bar width, show/hide back-to-top |
 
 ---

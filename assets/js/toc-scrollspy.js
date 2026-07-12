@@ -6,19 +6,61 @@
 
 (function () {
   function init() {
-    const tocLinks = document.querySelectorAll('.toc-link');
-    if (!tocLinks.length) return;
-
     const headings = Array.from(
       document.querySelectorAll('.post-content h2, .post-content h3')
     );
     if (!headings.length) return;
 
-    // Build id → toc-link map
+    const desktopList = document.getElementById('toc-list-desktop');
+    const mobileList = document.getElementById('toc-list-mobile');
+
+    // Populate TOC lists dynamically from article headings
+    if (desktopList || mobileList) {
+      headings.forEach((heading) => {
+        // Ensure the heading has an ID
+        if (!heading.id) {
+          heading.id = heading.textContent
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+        }
+
+        const isH3 = heading.tagName.toLowerCase() === 'h3';
+        const text = heading.textContent.trim();
+
+        const createLink = () => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `#${heading.id}`;
+          a.className = 'toc-link' + (isH3 ? ' toc-link--h3' : '');
+          a.textContent = text;
+          li.appendChild(a);
+          return li;
+        };
+
+        if (desktopList) {
+          desktopList.appendChild(createLink());
+        }
+        if (mobileList) {
+          mobileList.appendChild(createLink());
+        }
+      });
+    }
+
+    const tocLinks = document.querySelectorAll('.toc-link');
+    if (!tocLinks.length) return;
+
+    // Build id → toc-link map (supporting multiple links per ID, e.g. desktop + mobile)
     const linkMap = {};
     tocLinks.forEach((link) => {
-      const id = decodeURIComponent(link.getAttribute('href').slice(1));
-      linkMap[id] = link;
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const id = decodeURIComponent(href.slice(1));
+        if (!linkMap[id]) {
+          linkMap[id] = [];
+        }
+        linkMap[id].push(link);
+      }
     });
 
     let activeId = null;
@@ -27,7 +69,9 @@
       if (id === activeId) return;
       activeId = id;
       tocLinks.forEach((l) => l.classList.remove('active'));
-      if (linkMap[id]) linkMap[id].classList.add('active');
+      if (linkMap[id]) {
+        linkMap[id].forEach((link) => link.classList.add('active'));
+      }
     }
 
     const observer = new IntersectionObserver(
