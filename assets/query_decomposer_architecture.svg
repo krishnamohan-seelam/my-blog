@@ -1,0 +1,81 @@
+<svg width="100%" viewBox="0 0 680 610" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Query Decomposer Agent Architecture</title>
+  <desc>A LangGraph flow showing a user question going to the Decomposer, which updates a scratchpad, then a Router decides whether to loop back through Research or move to the Synthesizer for the final answer.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- User Question -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="260" y="20" width="160" height="44" rx="8" fill="rgb(68,68,65)" stroke="rgb(180,178,169)" stroke-width="0.5"/>
+    <text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(211,209,199)">User question</text>
+  </g>
+
+  <line x1="340" y1="64" x2="340" y2="104" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Decomposer Node -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="220" y="104" width="240" height="56" rx="8" fill="rgb(60,52,137)" stroke="rgb(175,169,236)" stroke-width="0.5"/>
+    <text x="340" y="126" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(206,203,246)">Decomposer (LLM)</text>
+    <text x="340" y="146" text-anchor="middle" dominant-baseline="central" font-size="12" fill="rgb(175,169,236)">Picks next sub-question or final answer</text>
+  </g>
+
+  <line x1="340" y1="160" x2="340" y2="200" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Scratchpad / State -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="210" y="200" width="260" height="56" rx="8" fill="rgb(8,80,65)" stroke="rgb(93,202,165)" stroke-width="0.5"/>
+    <text x="340" y="222" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(159,225,203)">Graph state</text>
+    <text x="340" y="242" text-anchor="middle" dominant-baseline="central" font-size="12" fill="rgb(93,202,165)">question, scratchpad[], iterations</text>
+  </g>
+
+  <line x1="340" y1="256" x2="340" y2="296" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Research Node -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="220" y="296" width="240" height="56" rx="8" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="0.5"/>
+    <text x="340" y="318" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(250,199,117)">Research (tool call)</text>
+    <text x="340" y="338" text-anchor="middle" dominant-baseline="central" font-size="12" fill="rgb(239,159,39)">Runs the chosen tool, appends Q→A</text>
+  </g>
+
+  <!-- Tools panel -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="490" y="302" width="150" height="44" rx="8" fill="rgb(99,56,6)" stroke="rgb(239,159,39)" stroke-width="0.5"/>
+    <text x="565" y="318" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="500" fill="rgb(250,199,117)">Tools</text>
+    <text x="565" y="335" text-anchor="middle" dominant-baseline="central" font-size="11" fill="rgb(239,159,39)">web_search · wiki · calc</text>
+  </g>
+  <line x1="460" y1="324" x2="490" y2="324" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="340" y1="352" x2="340" y2="392" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Router Node -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="220" y="392" width="240" height="56" rx="8" fill="rgb(113,43,19)" stroke="rgb(240,153,123)" stroke-width="0.5"/>
+    <text x="340" y="414" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(245,196,179)">Router (conditional edge)</text>
+    <text x="340" y="434" text-anchor="middle" dominant-baseline="central" font-size="12" fill="rgb(240,153,123)">Follow-up? → loop · Final Answer? → end</text>
+  </g>
+
+  <!-- Loop back: Router -> Graph state -->
+  <path d="M220 420 L100 420 L100 228 L210 228" fill="none" stroke="rgb(194,192,182)" stroke-width="1" stroke-dasharray="5 3" marker-end="url(#arrow)"/>
+  <text x="54" y="315" text-anchor="middle" font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="rgb(194,192,182)">next sub-question</text>
+
+  <!-- Router -> Synthesizer -->
+  <line x1="340" y1="448" x2="340" y2="472" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Synthesizer Node -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="200" y="472" width="280" height="56" rx="8" fill="rgb(60,52,137)" stroke="rgb(175,169,236)" stroke-width="0.5"/>
+    <text x="340" y="494" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(206,203,246)">Synthesizer</text>
+    <text x="340" y="514" text-anchor="middle" dominant-baseline="central" font-size="12" fill="rgb(175,169,236)">Uses inline answer, or composes from scratchpad</text>
+  </g>
+
+  <line x1="340" y1="528" x2="340" y2="552" stroke="rgb(156,154,146)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Final Response -->
+  <g font-family="Anthropic Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <rect x="260" y="552" width="160" height="36" rx="8" fill="rgb(8,80,65)" stroke="rgb(93,202,165)" stroke-width="0.5"/>
+    <text x="340" y="570" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="rgb(159,225,203)">Final response</text>
+  </g>
+</svg>

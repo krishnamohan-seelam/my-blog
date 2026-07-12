@@ -21,6 +21,7 @@ To handle these dynamic dependencies, we turn to the **Query Decomposer** patter
 
 This architecture offers a useful middle ground: the flexibility of ReAct combined with the structured control, traceability, and state predictability of LangGraph.
 
+<img src="{{ site.baseurl }}/assets/query_decomposer_architecture.svg" alt="Query Decomposer Architecture" style="width: 80vw; max-width: 700px; position: relative; left: 50%; transform: translateX(-50%); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
 ---
 
 ## ReAct vs. Planner-Executor vs. Query Decomposer
