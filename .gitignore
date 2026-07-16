@@ -39,4 +39,5 @@ __pycache__/
 *.py
 pyscripts
 
-DOCS/
+DOCS
+.agents/
