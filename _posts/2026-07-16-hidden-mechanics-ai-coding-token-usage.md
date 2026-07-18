@@ -156,9 +156,60 @@ flowchart TD
 
 ---
 
+## From One Request to Millions: Why the Flow Above Is Just the Beginning
+
+The pipeline diagram above shows a *single* request — one prompt, one context assembly pass, one model call. In a simple chat scenario, that is all that happens.
+
+But here is the uncomfortable truth: the moment you move beyond a single exchange into an **agentic workflow** — where the model reads files, runs shell commands, validates output, and loops back — that clean, linear flow becomes a **compounding cost machine**.
+
+Consider the macro-level evidence first:
+
+- **Programming now dominates LLM inference.** Coding workloads grew from roughly **11% of all LLM token consumption** in early 2025 to **over 50% by late 2025**, driven by the mainstream adoption of tools like Claude Code, Cursor, and GitHub Copilot Agents. (Source: *Menlo Ventures State of AI 2025*; *OpenRouter inference data, 2025*)
+- **Agentic tasks are categorically more expensive.** Research consistently shows that AI agents consume **5–30× more tokens per task** than a standard, single-turn chatbot interaction. For complex, multi-file codebase operations, the gap can reach **1,000×**.
+- **The cost is almost entirely input-side.** Unlike chat, where output tokens dominate, agentic coding tasks are characterized by *massive input token volumes* — because the model re-reads its accumulated history and tool outputs at every step.
+
+To understand *why*, you need to understand what happens inside the context window across multiple steps — and that is exactly what the next section unpacks.
+
+---
+
 ## How AI Agents Spend Tokens
 
 In an agentic coding session, each request you send to the model includes system instructions, tool definitions, repository context, and the ongoing conversation history. This repeated beginning is called the **prompt prefix**.
+
+### The Context Snowball: How Tokens Accumulate Per Step
+
+Agentic systems operate in a **Perceive → Plan → Act → Observe → Repeat** loop. The critical detail is this: to maintain coherence, the LLM must receive the *entire accumulated history* — every prior reasoning step, every tool call, every observation — at the start of each new iteration.
+
+This creates a **context snowball effect**, where input token counts grow super-linearly with each loop cycle:
+
+| Agent Loop Step | What's Added to Context | Cumulative Input Tokens (est.) |
+|---|---|---|
+| **Step 1** — Initial task analysis | System prompt + tools + user goal | ~6,500 |
+| **Step 2** — File read (e.g., grep results) | + step 1 history + tool output | ~9,000 |
+| **Step 3** — Code generation attempt | + step 2 history + generated code | ~14,000 |
+| **Step 4** — Test execution + error log | + step 3 history + stderr output | ~20,000 |
+| **Step 5** — Fix and re-validate | + step 4 history + corrected code | ~28,000 |
+
+> ⚠️ **The "Agent Tax":** Each MCP tool definition adds approximately **100–500 tokens** of fixed overhead per step, compounding with every iteration regardless of whether that tool is ever called. (Source: *GitHub community analysis, 2025*)
+
+This explains real-world observations: a task you might expect to cost a few hundred tokens can balloon to tens of thousands by the time an agent reaches a working solution.
+
+### Real-World Token Ranges by Task Type
+
+To put concrete numbers to this, here are observed token ranges for typical agentic coding workflows (combining input + output across the full agent session):
+
+| Task Type | Total Tokens per Request / Session |
+|---|---|
+| **Code completion (inline, single-turn)** | 550 – 2,500 |
+| **Code explanation (chat, with file context)** | 800 – 4,000 |
+| **Bug debugging (agentic, multi-step)** | 1,500 – 7,000 |
+| **Full feature implementation (agentic)** | 7,000 – 70,000 |
+| **Multi-file refactoring** | 15,000 – 80,000 |
+| **Codebase Q&A (large repo, RAG-augmented)** | 10,500 – 103,000 |
+
+> 📊 *Source: Aggregated benchmarks from VS Code Copilot telemetry, OpenRouter inference logs, and community profiling studies (2025–2026).*
+
+For context: a **moderate developer** running 30–100 agentic requests per day processes roughly **1M–6M tokens per month**. A **heavy power user** doing autonomous coding sessions can reach **40M–400M tokens per month** — at which point token governance becomes as important as the code itself.
 
 ### The Prompt Prefix and Caching
 For example, if you run a code-review task on two different Python files in the same session, both requests will share the exact same system instructions, tool definitions, and review guidelines. 
