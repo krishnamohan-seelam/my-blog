@@ -57,8 +57,15 @@
   <!-- Footer -->
   {% include footer.html %}
 
+  <!-- Search Modal -->
+  {% include search-modal.html %}
+
   <!-- JS: Theme toggle + hamburger (deferred) -->
   <script defer src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+
+  <!-- JS: Simple Jekyll Search + Setup -->
+  <script defer src="{{ '/assets/js/vendor/simple-jekyll-search.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/search-setup.js' | relative_url }}"></script>
 
 </body>
 </html>

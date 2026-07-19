@@ -30,6 +30,7 @@ A technical blog covering hands-on tutorials and deep dives on:
 
 - 🌗 **Dark/light mode** — persisted via `localStorage`, respects `prefers-color-scheme`
 - 📐 **Two-column home** — post list + sticky sidebar (68% / 32%)
+- 🔍 **Client-side search** — fast fuzzy matching overlay powered by Simple-Jekyll-Search
 - 🏷️ **Tag filter chips** — client-side filter, no page reload
 - 📖 **Reading experience** — 18px body, 680px content width, 1.82 line-height
 - 📊 **Reading progress bar** — thin accent bar at top of post pages
