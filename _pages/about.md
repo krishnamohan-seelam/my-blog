@@ -6,7 +6,7 @@ permalink: /about/
 
 ## About Me
 
-I'm [Krishna Mohan Seelam](https://github.com/krishnamohan-seelam), an AI/ML engineer exploring the frontier of building intelligent systems.
+I'm [Krishna Mohan Seelam](https://github.com/krishnamohan-seelam), Software Engineer exploring the frontier of building intelligent systems.
 
 This blog documents my learnings on:
 
