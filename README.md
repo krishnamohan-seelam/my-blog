@@ -10,7 +10,7 @@
 
 A technical blog covering hands-on tutorials and deep dives on:
 - **AI Agents** — LangGraph, ReAct, Planner-Executor patterns
-- **LLMs** — prompt engineering, function calling, multi-step reasoning
+- **LLMs & Prompt Engineering** — CO-STAR/RISEN frameworks, token optimization, prompt safety, 6-stage SWE lifecycle integration
 - **Databases** — MongoDB vector search, RAG architectures
 - **Developer tools** — practical walkthroughs with working code
 
