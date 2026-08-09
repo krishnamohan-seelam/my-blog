@@ -429,7 +429,7 @@ Evaluate our proposed stack: FastAPI (Python 3.12) + PostgreSQL 16 + Redis 7 + A
 
 ### Context Window Management & API Compression
 
-Modern models possess large context limits (**GPT-4o: 128K tokens**, **Claude 3.5 Sonnet: 200K tokens**, **Gemini 1.5 Pro: 1M tokens**). However, context is a managed resource ($1 \text{ token} \approx 0.75 \text{ words}$). Passing massive codebases causes silent truncation and context degradation.
+Modern models possess large context limits (**GPT-4o: 128K tokens**, **Claude 3.5 Sonnet: 200K tokens**, **Gemini 1.5 Pro: 1M tokens**). However, context is a managed resource (1 token ≈ 0.75 words). Passing massive codebases causes silent truncation and context degradation.
 
 To pass large modules efficiently, compress source files into YAML API signatures:
 

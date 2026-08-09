@@ -20,30 +20,33 @@ A technical blog covering hands-on tutorials and deep dives on:
 
 - **Jekyll 4.4.1** — static site generator
 - **GitHub Pages** — hosting
-- **minima 2.5** — theme base (heavily customized)
+- **minima 2.5** — theme base (custom Dev Magazine layout)
 - **Plugins**: `jekyll-feed`, `jekyll-sitemap`, `jekyll-paginate`, `jekyll-seo-tag`
-- **Fonts**: Instrument Serif, DM Mono, DM Sans (Google Fonts)
+- **Fonts**: Plus Jakarta Sans (800 Display), Inter (Body), JetBrains Mono (Code/Meta)
 
 ---
 
-## Features (v2 — UI/UX Redesign)
+## Features (v3 — Dev Magazine UI/UX Redesign)
 
+- 🎨 **Option 1 Modern Tech Typography** — Plus Jakarta Sans display headings, Inter body prose, JetBrains Mono code & metadata
+- 📰 **Design-B Homepage** — hero micro-profile, single-line headline *"Developer tooling for AI agents"*, and 2-column glassmorphic card grid
+- 👤 **Relocated Author Bio** — integrated into homepage hero header and post-footer Author Card (removing right-sidebar clutter)
+- 🏷️ **In-Page Topic Filter** — interactive tag chips filtering post cards instantly without page reloads or 404s
 - 🌗 **Dark/light mode** — persisted via `localStorage`, respects `prefers-color-scheme`
-- 📐 **Two-column home** — post list + sticky sidebar (68% / 32%)
 - 🔍 **Client-side search** — fast fuzzy matching overlay powered by Simple-Jekyll-Search
-- 🏷️ **Tag filter chips** — client-side filter, no page reload
-- 📖 **Reading experience** — 18px body, 680px content width, 1.82 line-height
+- 📖 **Reading experience** — 17px body, 700px content width, 1.78 line-height
 - 📊 **Reading progress bar** — thin accent bar at top of post pages
 - 📋 **Table of contents** — dynamically generated in JS, sticky desktop, collapsible mobile; 3+ headings auto-trigger
 - 📋 **Copy code button** — on all code blocks with language label
+- 🖼️ **Flexible Header Banner** — supports both `cover_image` and `image` frontmatter with gradient fallback
 - 🔗 **Share buttons** — Twitter/X, LinkedIn, copy-link
 - 🔄 **Post navigation** — prev/next with title
 - 🔗 **Related posts** — by shared tag (up to 3)
-- ⬆️ **Back to top** — appears after 400px scroll
+- ⬆️ **Back to top** — appears after 280px scroll
 - 🏷️ **Tag index** — `/tags/` page listing all posts by tag
 - 📄 **Custom 404**
 - 📡 **Open Graph + Twitter Card + JSON-LD** SEO
-- ♿ **Accessible** — skip-link, aria labels, focus rings, semantic HTML
+- ♿ **Accessible & Color-Blind Friendly** — skip-link, aria labels, focus rings, semantic HTML, non-color dependent state indicators
 
 ---
 

@@ -45,7 +45,7 @@ layout: default
       <span>{{ minutes }} min read</span>
     </div>
 
-    <!-- Cover image -->
+    <!-- Cover image (only rendered if explicitly specified via cover_image to avoid duplication with inline article images) -->
     {% if page.cover_image %}
     <div class="post-hero__cover">
       <img src="{{ page.cover_image | relative_url }}"

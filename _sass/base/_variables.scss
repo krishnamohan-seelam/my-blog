@@ -4,29 +4,35 @@
 
 /* ── Dark Mode (default) ────────────────────────────────────── */
 :root {
-  --bg:           #0d0d0d;
-  --bg-subtle:    #111111;
-  --bg-card:      #141414;
-  --bg-hover:     #181818;
-  --border:       #1e1e1e;
-  --border-mid:   #2a2a2a;
-  --text:         #e8e4dc;
-  --text-muted:   #6b7280;
-  --text-dim:     #4b5563;
-  --accent:       #6ee7b7;
-  --accent-hover: #a7f3d0;
-  --accent-bg:    rgba(110, 231, 183, 0.10);
-  --heading-color:#f5f0e8;
-  --code-bg:      #1a1a1a;
-  --pre-bg:       #111111;
+  --bg:           #0a0e1a;
+  --bg-subtle:    #0f1420;
+  --bg-card:      rgba(255, 255, 255, 0.04);
+  --bg-hover:     rgba(255, 255, 255, 0.07);
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-mid:   rgba(255, 255, 255, 0.12);
+  --text:         #e2e8f0;
+  --text-muted:   #94a3b8;
+  --text-dim:     #475569;
+  --accent:       #7c3aed;
+  --accent-hover: #9333ea;
+  --accent-2:     #2563eb;
+  --accent-text:  #a78bfa;
+  --accent-bg:    rgba(124, 58, 237, 0.10);
+  --accent-border:rgba(124, 58, 237, 0.25);
+  --heading-color:#f8fafc;
+  --code-bg:      #0d1117;
+  --pre-bg:       #0d1117;
   --shadow:       0 4px 24px rgba(0, 0, 0, 0.45);
   --shadow-sm:    0 2px 8px  rgba(0, 0, 0, 0.25);
-  --shadow-card:  0 1px 3px  rgba(0, 0, 0, 0.3);
+  --shadow-card:  0 8px 28px rgba(0, 0, 0, 0.3);
 
-  /* Fonts */
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-mono:  'DM Mono', 'Courier New', monospace;
-  --font-sans:  'DM Sans', system-ui, sans-serif;
+  /* Fonts — Option 1 Modern Tech Stack */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Legacy Fallback aliases */
+  --font-serif:   var(--font-display);
 
   /* Layout */
   --container-wide:  1100px;
@@ -34,33 +40,36 @@
   --content-width:    800px;
   --sidebar-width:    268px;
   --home-gap:          48px;
-  --nav-height:        64px;
-  --radius:             2px;
-  --radius-md:          6px;
-  --radius-lg:         12px;
+  --nav-height:        60px;
+  --radius:             8px;
+  --radius-md:         10px;
+  --radius-lg:         16px;
   --progress-height:    3px;
 }
 
 /* ── Light Mode ─────────────────────────────────────────────── */
 :root[data-theme="light"] {
   --bg:           #ffffff;
-  --bg-subtle:    #f9fafb;
+  --bg-subtle:    #f8fafc;
   --bg-card:      #ffffff;
-  --bg-hover:     #f3f4f6;
-  --border:       #e5e7eb;
-  --border-mid:   #d1d5db;
-  --text:         #111827;
-  --text-muted:   #4b5563;
-  --text-dim:     #9ca3af;
+  --bg-hover:     #f1f5f9;
+  --border:       #e2e8f0;
+  --border-mid:   #cbd5e1;
+  --text:         #1e293b;
+  --text-muted:   #64748b;
+  --text-dim:     #94a3b8;
   --accent:       #059669;
   --accent-hover: #047857;
+  --accent-2:     #2563eb;
+  --accent-text:  #059669;
   --accent-bg:    rgba(5, 150, 105, 0.08);
-  --heading-color:#111827;
-  --code-bg:      #f3f4f6;
-  --pre-bg:       #f9fafb;
+  --accent-border:rgba(5, 150, 105, 0.20);
+  --heading-color:#0f172a;
+  --code-bg:      #f6f8fa;
+  --pre-bg:       #f6f8fa;
   --shadow:       0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-sm:    0 2px 8px  rgba(0, 0, 0, 0.06);
-  --shadow-card:  0 1px 3px  rgba(0, 0, 0, 0.07);
+  --shadow-card:  0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
 /* ── SCSS Spacing Scale ─────────────────────────────────────── */

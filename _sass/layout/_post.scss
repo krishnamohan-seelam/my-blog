@@ -28,10 +28,10 @@
 }
 
 .post-hero__title {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: clamp(28px, 4.5vw, 42px);
   line-height: 1.18;
-  font-weight: 400;
+  font-weight: 700;
   color: var(--heading-color);
   margin-bottom: $sp-24;
   max-width: 700px;
@@ -132,8 +132,9 @@
 }
 
 .author-card__name {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: 18px;
+  font-weight: 700;
   color: var(--heading-color);
   margin-bottom: 4px;
 }
@@ -141,7 +142,7 @@
 .author-card__title {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--accent);
+  color: var(--accent-text);
   letter-spacing: 0.05em;
   margin-bottom: $sp-8;
 }
@@ -213,14 +214,14 @@
 }
 
 .related-post-card__title {
-  font-family: var(--font-serif);
-  font-size: 16px;
+  font-family: var(--font-display);
+  font-size: 15px;
   color: var(--text);
   line-height: 1.4;
-  font-weight: 400;
+  font-weight: 600;
   transition: color 0.15s;
 
   .related-post-card:hover & {
-    color: var(--accent);
+    color: var(--accent-text);
   }
 }

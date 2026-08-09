@@ -3,141 +3,134 @@
    ============================================================ */
 
 .post-card {
-  display: block;
-  padding: $sp-24 0;
-  border-bottom: 0.5px solid var(--border);
-  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: $sp-24;
+  transition: all 0.2s ease;
   position: relative;
+  overflow: hidden;
   cursor: pointer;
 
-  &:first-child { padding-top: 0; }
-  &:last-child  { border-bottom: none; }
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.22s ease;
+  }
 
   &:hover {
-    .post-card__title { color: var(--accent); }
-    .post-card__arrow { opacity: 1; transform: translateX(4px); }
+    background: var(--bg-hover);
+    border-color: var(--accent-border);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+
+    &::before {
+      transform: scaleY(1);
+    }
+
+    .post-card__title {
+      color: var(--accent-text);
+    }
+
+    .post-card__arrow {
+      color: var(--accent-text);
+      transform: translateX(3px);
+    }
   }
 }
 
-.post-card--with-image {
-  display: grid;
-  grid-template-columns: 1fr 100px;
-  gap: $sp-16;
-  align-items: start;
-
-  @media (max-width: $bp-mobile) {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ── Card Meta Row ──────────────────────────────────────────── */
-.post-card__meta {
+/* ── Card Tags Row ─────────────────────────────────────────── */
+.post-card__tags {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
   gap: $sp-8;
-  margin-bottom: $sp-10;
+  flex-wrap: wrap;
+  margin-bottom: $sp-12;
+}
+
+.card-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  border: 0.5px solid var(--accent-border);
+  font-family: var(--font-mono);
+}
+
+.post-card__new-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 
 /* ── Card Title ─────────────────────────────────────────────── */
 .post-card__title {
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 2.5vw, 22px);
-  line-height: 1.32;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.35;
   color: var(--heading-color);
-  font-weight: 400;
-  margin-bottom: $sp-8;
+  font-weight: 700;
+  margin-bottom: $sp-10;
   transition: color 0.18s ease;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 /* ── Card Excerpt ───────────────────────────────────────────── */
 .post-card__excerpt {
   font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.65;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 0;
+  margin-bottom: $sp-24;
+  flex-grow: 1;
 }
 
-/* ── Card Arrow ─────────────────────────────────────────────── */
+/* ── Card Footer ────────────────────────────────────────────── */
+.post-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $sp-16;
+  border-top: 0.5px solid var(--border);
+  margin-top: auto;
+}
+
+.post-card__meta {
+  display: flex;
+  gap: $sp-8;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
 .post-card__arrow {
-  display: inline-block;
-  font-size: 14px;
-  color: var(--accent);
-  margin-left: $sp-4;
-  opacity: 0;
+  font-size: 15px;
+  color: var(--text-dim);
   transition: all 0.18s ease;
 }
 
-/* ── Cover Thumbnail ────────────────────────────────────────── */
-.post-card__thumb {
-  width: 100px;
-  height: 72px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  flex-shrink: 0;
-  background: var(--bg-subtle);
-  border: 0.5px solid var(--border);
-  order: 2;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    margin: 0;
-    transition: transform 0.3s ease;
-  }
-
-  .post-card:hover & img {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: $bp-mobile) {
-    display: none;
-  }
-}
-
-.post-card__body {
-  order: 1;
-}
-
-/* ── NEW Badge ──────────────────────────────────────────────── */
-.post-card__new-badge {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 500;
-  color: var(--bg);
-  background: var(--accent);
-  padding: 2px 6px;
-  border-radius: 100px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  vertical-align: middle;
-}
-
-/* ── Reading Time ───────────────────────────────────────────── */
-.reading-time {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  letter-spacing: 0.02em;
-}
-
-/* ── Date ───────────────────────────────────────────────────── */
-time,
-.post-date {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-dim);
-  letter-spacing: 0.03em;
-}
-
-/* ── Dot separator ──────────────────────────────────────────── */
 .meta-sep {
   font-size: 10px;
   color: var(--border-mid);
