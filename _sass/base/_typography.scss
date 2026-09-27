@@ -191,5 +191,9 @@
       background: var(--bg-subtle);
       transition: background 0.1s;
     }
+
+    /* Reference rows targeted by in-text <sup><a href="#ref-N"> citations */
+    [id^="ref-"] { scroll-margin-top: calc(var(--nav-height) + 32px); }
+    tr:has(:target) td { background: var(--bg-subtle); }
   }
 }
