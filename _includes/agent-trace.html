@@ -1,0 +1,15 @@
+{% comment %}
+  agent-trace.html — embeds a recorded agent-trace/1 run.
+  Usage: {% include agent-trace.html trace="query-decomposer-sample" step=3 %}
+{% endcomment %}
+{% assign trace_src = "/assets/traces/" | append: include.trace | append: ".json" | relative_url %}
+{% assign trace_step = include.step | default: 1 %}
+
+<agent-trace src="{{ trace_src }}" start="{{ trace_step }}">
+  <noscript>
+    <p class="agent-trace-noscript">
+      JavaScript is required to view this trace —
+      <a href="{{ trace_src }}" target="_blank" rel="noopener noreferrer">view the raw trace JSON</a>.
+    </p>
+  </noscript>
+</agent-trace>
