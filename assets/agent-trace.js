@@ -6,6 +6,16 @@
 
 (function () {
   const PLAYBACK_INTERVAL_MS = 1200;
+  const claimedHashes = new Set();
+
+  function slugFor(src) {
+    return src.split('/').pop().replace(/\.json$/, '');
+  }
+
+  function parseStepHash(hash, slug) {
+    const match = new RegExp(`^#${slug}-step-(\\d+)$`).exec(hash);
+    return match ? parseInt(match[1], 10) : null;
+  }
 
   const FALLBACK_SUMMARY = {
     tool_call: (step) => `Called tool ${(step.detail && step.detail.tool) || 'unknown'}`,
@@ -101,6 +111,20 @@
 
     connectedCallback() {
       this._renderStatus('Loading trace…');
+
+      const slug = slugFor(this.getAttribute('src'));
+      const hash = window.location.hash;
+      const hashStepId = parseStepHash(hash, slug);
+      if (hashStepId !== null && !claimedHashes.has(hash)) {
+        claimedHashes.add(hash);
+        this._hashStepId = hashStepId;
+        this._fetched = true;
+        this._load().then(() => {
+          this.scrollIntoView({ block: 'center' });
+        });
+        return;
+      }
+
       this._observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -131,11 +155,17 @@
         return;
       }
 
-      const startAttr = parseInt(this.getAttribute('start'), 10);
       const maxIndex = Math.max(0, this._trace.steps.length - 1);
-      this._currentIndex = Number.isFinite(startAttr)
-        ? Math.min(maxIndex, Math.max(0, startAttr - 1))
-        : 0;
+
+      if (this._hashStepId !== undefined) {
+        const hashIndex = this._trace.steps.findIndex((s) => s.id === this._hashStepId);
+        this._currentIndex = hashIndex >= 0 ? hashIndex : 0;
+      } else {
+        const startAttr = parseInt(this.getAttribute('start'), 10);
+        this._currentIndex = Number.isFinite(startAttr)
+          ? Math.min(maxIndex, Math.max(0, startAttr - 1))
+          : 0;
+      }
 
       this._render();
     }
@@ -224,11 +254,35 @@
           li.appendChild(badgeEl);
         }
 
+        const linkBtn = makeButton('Copy link', () => this._copyLinkFor(step, linkBtn));
+        linkBtn.className += ' agent-trace__link-btn';
+        li.appendChild(linkBtn);
+
         this._listEl.appendChild(li);
         if (index === this._currentIndex) {
           this._activeStepEl = li;
         }
       });
+    }
+
+    _copyLinkFor(step, linkBtn) {
+      const slug = slugFor(this.getAttribute('src'));
+      const hash = `#${slug}-step-${step.id}`;
+      const url = `${window.location.origin}${window.location.pathname}${window.location.search}${hash}`;
+
+      window.history.replaceState(null, '', hash);
+
+      const originalLabel = linkBtn.textContent;
+      const showCopied = () => {
+        linkBtn.textContent = 'Copied!';
+        setTimeout(() => {
+          linkBtn.textContent = originalLabel;
+        }, 1500);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(showCopied, () => {});
+      }
     }
 
     _renderGraph() {
