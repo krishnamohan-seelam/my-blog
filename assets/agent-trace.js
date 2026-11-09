@@ -27,6 +27,20 @@
     return fn ? fn(step) : `${step.kind} step`;
   }
 
+  function tokenCostLineFor(step, trace) {
+    if (!step.tokens || typeof step.cost_inr !== 'number') return null;
+    const asOf = trace.pricing && trace.pricing.as_of;
+    const asOfText = asOf ? ` (prices as of ${asOf})` : '';
+    return `${step.tokens.in} in / ${step.tokens.out} out · ≈ ₹${step.cost_inr}${asOfText}`;
+  }
+
+  function truncatedBadgeFor(step) {
+    if (!step.truncated) return null;
+    return typeof step.original_size === 'number'
+      ? `truncated (original ${step.original_size} bytes)`
+      : 'truncated';
+  }
+
   const MERMAID_CDN_URL = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   let mermaidModulePromise = null;
 
@@ -193,6 +207,22 @@
         line.textContent = `${step.id}. [${step.kind}] ${summaryFor(step)}`;
         line.addEventListener('click', () => this._goTo(index));
         li.appendChild(line);
+
+        const tokenCostLine = tokenCostLineFor(step, this._trace);
+        if (tokenCostLine) {
+          const costEl = document.createElement('span');
+          costEl.className = 'agent-trace__cost';
+          costEl.textContent = tokenCostLine;
+          li.appendChild(costEl);
+        }
+
+        const truncatedBadge = truncatedBadgeFor(step);
+        if (truncatedBadge) {
+          const badgeEl = document.createElement('span');
+          badgeEl.className = 'agent-trace__badge agent-trace__badge--truncated';
+          badgeEl.textContent = truncatedBadge;
+          li.appendChild(badgeEl);
+        }
 
         this._listEl.appendChild(li);
         if (index === this._currentIndex) {
