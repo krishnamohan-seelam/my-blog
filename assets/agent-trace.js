@@ -183,16 +183,24 @@
       const root = document.createElement('div');
       root.className = 'agent-trace';
 
+      const main = document.createElement('div');
+      main.className = 'agent-trace__main';
+      root.appendChild(main);
+
       if (this._trace.graph && this._trace.graph.nodes && this._trace.graph.nodes.length) {
         const graphPanel = document.createElement('div');
         graphPanel.className = 'agent-trace__graph';
         this._graphPanel = graphPanel;
-        root.appendChild(graphPanel);
+        main.appendChild(graphPanel);
         this._renderGraph();
       } else {
         this._graphPanel = null;
         this._nodeIdMap = null;
       }
+
+      const right = document.createElement('div');
+      right.className = 'agent-trace__right';
+      main.appendChild(right);
 
       const controls = document.createElement('div');
       controls.className = 'agent-trace__controls';
@@ -201,12 +209,12 @@
       const nextBtn = makeButton('Next', () => this._step(1));
       controls.append(backBtn, playBtn, nextBtn);
       this._playBtn = playBtn;
-      root.appendChild(controls);
+      right.appendChild(controls);
 
       const list = document.createElement('ol');
       list.className = 'agent-trace__steps';
       this._listEl = list;
-      root.appendChild(list);
+      right.appendChild(list);
 
       const detailWrap = document.createElement('details');
       detailWrap.className = 'agent-trace__detail';
@@ -217,7 +225,7 @@
       detailBody.className = 'agent-trace__detail-body';
       detailWrap.append(summaryEl, detailBody);
       this._detailBody = detailBody;
-      root.appendChild(detailWrap);
+      right.appendChild(detailWrap);
 
       this.appendChild(root);
       this._renderStepList();
