@@ -37,6 +37,29 @@
     return fn ? fn(step) : `${step.kind} step`;
   }
 
+  const DETAIL_FIELDS = {
+    llm: (detail) => [
+      ['Prompt', detail.prompt],
+      ['Response', detail.response],
+    ],
+    tool_call: (detail) => [
+      ['Tool', detail.tool],
+      ['Args', detail.args],
+    ],
+    tool_result: (detail) => [
+      ['Tool', detail.tool],
+      ['Output', detail.output],
+    ],
+    state: (detail) => [['Changed', detail.changed]],
+  };
+
+  function detailFieldsFor(step) {
+    if (!step.detail) return null;
+    const fn = DETAIL_FIELDS[step.kind];
+    if (!fn) return null;
+    return fn(step.detail).filter(([, value]) => value !== undefined);
+  }
+
   function tokenCostLineFor(step, trace) {
     if (!step.tokens || typeof step.cost_inr !== 'number') return null;
     const asOf = trace.pricing && trace.pricing.as_of;
@@ -339,10 +362,33 @@
       const step = this._trace.steps[this._currentIndex];
       this._detailBody.textContent = '';
 
-      const pre = document.createElement('pre');
-      pre.className = 'agent-trace__detail-content';
-      pre.textContent = step.detail ? JSON.stringify(step.detail, null, 2) : '(no detail for this step)';
-      this._detailBody.appendChild(pre);
+      if (!step.detail) {
+        const p = document.createElement('p');
+        p.className = 'agent-trace__detail-empty';
+        p.textContent = '(no detail for this step)';
+        this._detailBody.appendChild(p);
+        return;
+      }
+
+      const fields = detailFieldsFor(step);
+      if (!fields) {
+        const pre = document.createElement('pre');
+        pre.className = 'agent-trace__detail-content';
+        pre.textContent = JSON.stringify(step.detail, null, 2);
+        this._detailBody.appendChild(pre);
+        return;
+      }
+
+      const dl = document.createElement('dl');
+      dl.className = 'agent-trace__detail-fields';
+      fields.forEach(([label, value]) => {
+        const dt = document.createElement('dt');
+        dt.textContent = label;
+        const dd = document.createElement('dd');
+        dd.textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+        dl.append(dt, dd);
+      });
+      this._detailBody.appendChild(dl);
     }
 
     _goTo(index) {
