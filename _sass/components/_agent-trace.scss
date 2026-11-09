@@ -1,0 +1,189 @@
+/* ============================================================
+   Agent Trace Viewer — _sass/components/_agent-trace.scss
+   Renders <agent-trace> (assets/agent-trace.js). Light DOM, so all
+   colors come from the theme's existing CSS custom properties.
+   ============================================================ */
+
+.agent-trace {
+  margin: $sp-32 0;
+  padding: $sp-24;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.agent-trace__loading,
+.agent-trace__error {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.agent-trace__error {
+  color: var(--accent-text);
+}
+
+.agent-trace__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp-24;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.agent-trace__graph {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: $sp-16;
+  overflow-x: auto;
+
+  svg {
+    max-width: 100%;
+  }
+
+  .agent-trace__node--active {
+    > rect,
+    > polygon,
+    > circle {
+      stroke: var(--accent) !important;
+      stroke-width: 3px !important;
+      fill: var(--accent-bg) !important;
+    }
+  }
+}
+
+.agent-trace__right {
+  display: flex;
+  flex-direction: column;
+  gap: $sp-16;
+  min-width: 0;
+}
+
+.agent-trace__controls {
+  display: flex;
+  gap: $sp-8;
+}
+
+.agent-trace__btn {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: $sp-8 $sp-12;
+  border: 1px solid var(--border-mid);
+  border-radius: 6px;
+  background: var(--bg-hover);
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+  }
+}
+
+.agent-trace__link-btn {
+  margin-left: auto;
+  font-size: 11px;
+  padding: $sp-4 $sp-8;
+}
+
+.agent-trace__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 360px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.agent-trace__step {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $sp-8;
+  padding: $sp-8 $sp-12;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &--active {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+  }
+}
+
+.agent-trace__step-line {
+  flex: 1 1 auto;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--accent-text);
+  }
+}
+
+.agent-trace__cost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.agent-trace__badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px $sp-8;
+  border-radius: 4px;
+
+  &--truncated {
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-border);
+  }
+}
+
+.agent-trace__detail {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: $sp-12;
+
+  summary {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    cursor: pointer;
+  }
+}
+
+.agent-trace__detail-content {
+  margin-top: $sp-8;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--code-bg);
+  border-radius: 6px;
+  padding: $sp-12;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.agent-trace-noscript {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+}
