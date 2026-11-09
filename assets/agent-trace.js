@@ -27,6 +27,44 @@
     return fn ? fn(step) : `${step.kind} step`;
   }
 
+  const MERMAID_CDN_URL = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  let mermaidModulePromise = null;
+
+  function loadMermaid() {
+    if (!mermaidModulePromise) {
+      mermaidModulePromise = import(MERMAID_CDN_URL).then((mod) => mod.default);
+    }
+    return mermaidModulePromise;
+  }
+
+  function getActiveTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'default' : 'dark';
+  }
+
+  function safeNodeId(name, index) {
+    return `node_${index}_${String(name).replace(/[^a-zA-Z0-9_]/g, '_')}`;
+  }
+
+  function buildMermaidDefinition(graph) {
+    const idByName = {};
+    graph.nodes.forEach((name, index) => {
+      idByName[name] = safeNodeId(name, index);
+    });
+
+    const lines = ['graph TD'];
+    graph.nodes.forEach((name) => {
+      const label = String(name).replace(/"/g, "'");
+      lines.push(`  ${idByName[name]}["${label}"]`);
+    });
+    graph.edges.forEach(([from, to]) => {
+      if (idByName[from] && idByName[to]) {
+        lines.push(`  ${idByName[from]} --> ${idByName[to]}`);
+      }
+    });
+
+    return { definition: lines.join('\n'), idByName };
+  }
+
   function makeButton(label, onClick) {
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -101,6 +139,17 @@
       const root = document.createElement('div');
       root.className = 'agent-trace';
 
+      if (this._trace.graph && this._trace.graph.nodes && this._trace.graph.nodes.length) {
+        const graphPanel = document.createElement('div');
+        graphPanel.className = 'agent-trace__graph';
+        this._graphPanel = graphPanel;
+        root.appendChild(graphPanel);
+        this._renderGraph();
+      } else {
+        this._graphPanel = null;
+        this._nodeIdMap = null;
+      }
+
       const controls = document.createElement('div');
       controls.className = 'agent-trace__controls';
       const backBtn = makeButton('Back', () => this._step(-1));
@@ -152,6 +201,48 @@
       });
     }
 
+    _renderGraph() {
+      const { definition, idByName } = buildMermaidDefinition(this._trace.graph);
+      this._nodeIdMap = idByName;
+
+      loadMermaid()
+        .then((mermaid) => {
+          mermaid.initialize({ startOnLoad: false, theme: getActiveTheme(), securityLevel: 'loose' });
+          const svgId = `agent-trace-mermaid-${Math.random().toString(36).slice(2)}`;
+          return mermaid.render(svgId, definition);
+        })
+        .then(({ svg }) => {
+          if (!this._graphPanel) return;
+          this._graphPanel.innerHTML = svg;
+          this._highlightActiveNode();
+        })
+        .catch((err) => {
+          if (!this._graphPanel) return;
+          this._graphPanel.textContent = '';
+          const p = document.createElement('p');
+          p.className = 'agent-trace__error';
+          p.textContent = `Could not render graph: ${err.message}`;
+          this._graphPanel.appendChild(p);
+        });
+    }
+
+    _highlightActiveNode() {
+      if (!this._graphPanel || !this._nodeIdMap) return;
+      const step = this._trace.steps[this._currentIndex];
+      const activeSafeId = step.node && this._nodeIdMap[step.node];
+
+      this._graphPanel.querySelectorAll('.node').forEach((el) => {
+        el.classList.remove('agent-trace__node--active');
+      });
+      if (!activeSafeId) return;
+
+      this._graphPanel.querySelectorAll('.node').forEach((el) => {
+        if (el.id && el.id.includes(`-${activeSafeId}-`)) {
+          el.classList.add('agent-trace__node--active');
+        }
+      });
+    }
+
     _renderDetail() {
       const step = this._trace.steps[this._currentIndex];
       this._detailBody.textContent = '';
@@ -168,6 +259,7 @@
       this._currentIndex = Math.max(0, Math.min(maxIndex, index));
       this._renderStepList();
       this._renderDetail();
+      this._highlightActiveNode();
       if (this._activeStepEl && this._activeStepEl.scrollIntoView) {
         this._activeStepEl.scrollIntoView({ block: 'nearest' });
       }
