@@ -332,6 +332,8 @@ LangGraph handles this state evolution gracefully, maintaining auditability at e
 
 ## Watch a Real Run, Step by Step
 
+> **Update (2026-11-11):** Added an interactive trace viewer below, recorded from a real run of this agent, so you can step through every node transition, LLM call, and tool call instead of just reading the state table above.
+
 Rather than just reading the table above, you can step through an actual recorded run of this agent — every node transition, LLM call, tool call, and state change, exactly as it happened:
 
 {% include agent-trace.html trace="query_decomposer-input1" step=1 %}
