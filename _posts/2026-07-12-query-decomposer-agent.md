@@ -330,6 +330,16 @@ LangGraph handles this state evolution gracefully, maintaining auditability at e
 
 ---
 
+## Watch a Real Run, Step by Step
+
+Rather than just reading the table above, you can step through an actual recorded run of this agent — every node transition, LLM call, tool call, and state change, exactly as it happened:
+
+{% include agent-trace.html trace="query_decomposer-input1" step=1 %}
+
+Use **Next**/**Back** to move one step at a time, or **Play** to watch it unfold automatically. Expand any step's detail pane to see the full prompt, response, or tool output behind it.
+
+---
+
 ## Advantages of the Query Decomposer Pattern
 
 1. **Focused Tool Calls**: Each Research step operates on a single, isolated sub-question rather than the full conversation history, keeping individual tool invocations cheap. The scratchpad itself is still resent to the Decomposer on every loop, so very long multi-hop chains will eventually see rising token costs too — this pattern trades some context growth for much tighter, more targeted tool calls than a general-purpose ReAct loop.
